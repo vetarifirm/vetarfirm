@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email Analyzer — Vetari</title>
+<meta name="description" content="Upload or paste a suspicious email and Trawl checks identity, headers, SPF, DKIM, DMARC, and links for phishing or spoofing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="vetari-logo.png">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .an-wrap{ padding:150px 0 130px; }
+
+  /* banner */
+  .an-banner{
+    background:linear-gradient(120deg, rgba(232,178,76,0.14), rgba(79,217,196,0.14)), var(--bg-panel);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:38px 40px;
+    margin-bottom:28px;
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+  }
+  .an-banner .eyebrow{ margin-bottom:14px; }
+  .an-banner h1{ font-size:clamp(26px,3.4vw,36px); margin-bottom:10px; }
+  .an-banner p{ color:var(--text-muted); font-size:14.5px; max-width:640px; }
+
+  /* layout */
+  .an-layout{ display:grid; grid-template-columns:300px 1fr; gap:20px; align-items:start; }
+
+  .info-card{
+    background:var(--bg-panel); border:1px solid var(--border); border-radius:16px;
+    padding:22px 22px; backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    margin-bottom:20px;
+  }
+  .info-card h3{ font-size:15px; margin-bottom:8px; font-family:'Space Grotesk',sans-serif; font-weight:600; }
+  .info-card > p{ color:var(--text-muted); font-size:13px; margin-bottom:14px; }
+  .info-card ul{ list-style:none; }
+  .info-card ul li{ display:flex; gap:10px; font-size:13px; color:var(--text-muted); padding:7px 0; line-height:1.5; }
+  .info-card ul li span.b{ color:var(--teal); flex:none; font-family:'IBM Plex Mono',monospace; }
+  .info-card ul.checks li{ display:block; padding:8px 0; border-top:1px solid var(--border-soft); }
+  .info-card ul.checks li:first-child{ border-top:none; }
+
+  .warn-card{
+    background:rgba(232,178,76,0.08); border:1px solid rgba(232,178,76,0.3); border-radius:16px;
+    padding:18px 20px; margin-bottom:20px; backdrop-filter:blur(16px);
+  }
+  .warn-card .wh{ display:flex; align-items:center; gap:8px; color:var(--amber); font-weight:600; font-size:13.5px; margin-bottom:8px; font-family:'Space Grotesk',sans-serif; }
+  .warn-card p{ color:var(--text-muted); font-size:13px; line-height:1.55; }
+
+  /* action panel */
+  .action-panel{
+    background:var(--bg-panel); border:1px solid var(--border); border-radius:16px;
+    padding:28px; backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+  }
+  .action-panel h2{ font-size:19px; margin-bottom:6px; }
+  .action-panel > .sub{ color:var(--text-muted); font-size:13.5px; margin-bottom:22px; }
+
+  .tabs{ display:flex; gap:10px; margin-bottom:22px; }
+  .tab-btn{
+    flex:1; padding:13px; border-radius:10px; border:1px solid var(--border);
+    background:rgba(255,255,255,0.02); color:var(--text-muted);
+    font-family:'IBM Plex Sans',sans-serif; font-size:13.5px; font-weight:500; cursor:pointer;
+    transition:all .15s ease;
+  }
+  .tab-btn.active{
+    border-color:rgba(79,217,196,0.5);
+    background:rgba(79,217,196,0.1);
+    color:var(--teal);
+  }
+
+  .field-label{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--text-faint);
+    text-transform:uppercase; letter-spacing:.06em; margin-bottom:10px;
+  }
+
+  .upload-zone{
+    border:1.5px dashed var(--border); border-radius:14px;
+    padding:44px 20px; text-align:center; cursor:pointer;
+    transition:all .15s ease; margin-bottom:16px;
+    background:rgba(255,255,255,0.015);
+  }
+  .upload-zone:hover, .upload-zone.dragover{ border-color:var(--teal); background:rgba(79,217,196,0.05); }
+  .upload-zone .icn{ font-size:22px; color:var(--text-faint); margin-bottom:10px; }
+  .upload-zone .main{ font-size:14px; color:var(--text); margin-bottom:6px; }
+  .upload-zone .sub{ font-size:12px; color:var(--text-faint); }
+
+  .file-list{ margin-bottom:16px; display:flex; flex-direction:column; gap:8px; }
+  .file-chip{
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    background:var(--bg-panel-2); border:1px solid var(--border-soft); border-radius:10px;
+    padding:10px 14px; font-size:13px;
+  }
+  .file-chip .fn{ color:var(--text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .file-chip .fs{ color:var(--text-faint); font-family:'IBM Plex Mono',monospace; font-size:11px; flex:none; margin-left:8px; }
+  .file-chip .fx{ color:var(--text-faint); cursor:pointer; flex:none; font-family:'IBM Plex Mono',monospace; padding:0 4px; }
+  .file-chip .fx:hover{ color:#E28C7A; }
+  .file-error{ color:#E28C7A; font-size:12.5px; margin-bottom:14px; font-family:'IBM Plex Mono',monospace; display:none; }
+
+  .header-input textarea{
+    width:100%; min-height:260px; resize:vertical;
+    background:var(--bg-panel-2); border:1px solid var(--border); border-radius:8px;
+    color:var(--text); font-family:'IBM Plex Mono', monospace; font-size:12.5px; line-height:1.6;
+    padding:16px; outline:none; margin-bottom:10px;
+  }
+  .header-input textarea:focus{ border-color:var(--amber); }
+  .sample-link{
+    font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--text-faint);
+    text-decoration:underline; cursor:pointer; margin-bottom:16px; display:inline-block;
+  }
+
+  .analyze-btn{ width:100%; justify-content:center; padding:14px; font-size:14px; margin-top:4px; }
+  .analyze-btn:disabled{ opacity:0.45; cursor:not-allowed; box-shadow:none; }
+
+  .disclaimer{
+    margin-top:18px; background:rgba(232,178,76,0.07); border:1px solid rgba(232,178,76,0.25);
+    border-radius:10px; padding:14px 16px; font-size:12.5px; color:var(--text-muted); line-height:1.55;
+  }
+  .disclaimer b{ color:var(--amber); }
+
+  /* results */
+  .results-wrap{ margin-top:20px; }
+  .result-card{
+    background:var(--bg-panel-2); border:1px solid var(--border-soft); border-radius:12px;
+    padding:20px; margin-bottom:14px;
+  }
+  .result-card .rh{ display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
+  .result-card .rh .fname{ font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--text); }
+  .badge{ font-family:'IBM Plex Mono',monospace; font-size:10.5px; padding:3px 9px; border-radius:20px; letter-spacing:.04em; }
+  .badge.demo{ color:var(--amber); border:1px solid rgba(232,178,76,0.35); }
+  .badge.pending{ color:var(--text-faint); border:1px solid var(--border); }
+
+  .res-row{ display:flex; justify-content:space-between; align-items:flex-start; gap:14px; padding:10px 0; border-top:1px solid var(--border-soft); font-size:13px; }
+  .res-row:first-child{ border-top:none; }
+  .res-row .rk{ color:var(--text-faint); font-family:'IBM Plex Mono', monospace; font-size:11px; text-transform:uppercase; letter-spacing:.05em; flex:none; width:110px; }
+  .res-row .rv{ color:var(--text); word-break:break-word; }
+
+  .flag-box{ margin-top:14px; padding-top:14px; border-top:1px solid var(--border-soft); }
+  .flag{ display:flex; gap:10px; padding:8px 0; font-size:13px; color:var(--text-muted); }
+  .flag .fi{ flex:none; font-family:'IBM Plex Mono', monospace; }
+  .flag.warn .fi{ color:var(--amber); }
+  .flag.ok .fi{ color:var(--teal); }
+
+  .chain{ margin-top:14px; padding-top:14px; border-top:1px solid var(--border-soft); }
+  .chain h4{ font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--text-faint); text-transform:uppercase; letter-spacing:.05em; margin-bottom:10px; }
+  .hop{ font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--text-muted); padding:8px 10px; background:rgba(0,0,0,0.2); border-radius:6px; margin-bottom:6px; word-break:break-word; }
+  .hop .n{ color:var(--amber); margin-right:8px; }
+
+  .row-actions{ display:flex; gap:10px; margin-top:14px; }
+  .row-actions button{
+    font-family:'IBM Plex Mono',monospace; font-size:11.5px; padding:8px 14px;
+    border-radius:8px; border:1px solid var(--border); background:rgba(255,255,255,0.03);
+    color:var(--text-muted); cursor:pointer;
+  }
+  .row-actions button:hover{ border-color:var(--teal); color:var(--teal); }
+  .row-status{ font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--text-faint); margin-top:8px; }
+
+  .placeholder-msg{ color:var(--text-faint); font-size:13.5px; font-family:'IBM Plex Mono', monospace; padding:8px 0; }
+
+  @media (max-width: 900px){
+    .an-layout{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="index.html" class="logo"><svg class="mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M18,12 L50,82 L82,12 L67,12 L50,52 L33,12 Z" fill="#534AB7"/><circle cx="50" cy="50" r="7" fill="none" stroke="#534AB7" stroke-width="2.5"/><line x1="50" y1="50" x2="68" y2="30" stroke="#534AB7" stroke-width="2.5"/><circle cx="68" cy="30" r="3" fill="#534AB7"/></svg>VETARI</a>
+    <div class="navlinks">
+      <a href="about.html">About</a>
+      <a href="solutions.html">Solutions</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="resources.html" style="color:var(--text);">Resources</a>
+    </div>
+    <a href="index.html#waitlist" class="btn btn-primary">Join waitlist</a>
+  </nav>
+</header>
+
+<main>
+  <section class="an-wrap">
+    <div class="wrap">
+
+      <div class="an-banner">
+        <div class="eyebrow">Free tool</div>
+        <h1>Email Analyzer</h1>
+        <p>Not sure if an email is safe? Send it to Trawl for a comprehensive analysis. We inspect identity, headers, SPF, DKIM, DMARC, and links for phishing or spoofing.</p>
+      </div>
+
+      <div class="an-layout">
+        <div class="side-col">
+          <div class="info-card">
+            <h3>Turn suspicious email into clear signals</h3>
+            <p>Get a detailed risk assessment in seconds.</p>
+            <ul>
+              <li><span class="b">→</span>Upload one to five .eml or .msg files for header, body, sender, and link review.</li>
+              <li><span class="b">→</span>Paste headers only when you don't want to upload the full email.</li>
+              <li><span class="b">→</span>Every result is broken down into evidence you can act on.</li>
+            </ul>
+          </div>
+
+          <div class="warn-card">
+            <div class="wh">▲ Don't click. Go direct.</div>
+            <p>If a message asks you to sign in, pay, download, or approve something, leave the email and go directly to the known site or application instead.</p>
+          </div>
+
+          <div class="info-card">
+            <h3>What the analyzer checks</h3>
+            <ul class="checks">
+              <li>Sender identity, Reply-To, Return-Path</li>
+              <li>SPF, DKIM, DMARC, DNS records</li>
+              <li>Links checked against threat intelligence sources</li>
+              <li>Content patterns consistent with social engineering</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="action-panel">
+          <h2>Analyze a suspicious email</h2>
+          <div class="sub">Upload the email file or paste headers to check for a threat.</div>
+
+          <div class="tabs">
+            <button class="tab-btn active" id="tabUpload">Upload Email</button>
+            <button class="tab-btn" id="tabHeader">Email Header Only</button>
+          </div>
+
+          <div id="uploadPane">
+            <div class="field-label">Email files</div>
+            <div class="upload-zone" id="dropZone">
+              <div class="icn">⭱</div>
+              <div class="main">Choose files or drag and drop</div>
+              <div class="sub">Upload one to five emails. Accepted: .eml, .msg. Max 5MB each.</div>
+              <input type="file" id="fileInput" accept=".eml,.msg" multiple style="display:none;">
+            </div>
+            <div class="file-error" id="fileError"></div>
+            <div class="file-list" id="fileList"></div>
+          </div>
+
+          <div id="headerPane" style="display:none;">
+            <div class="field-label">Raw headers</div>
+            <div class="header-input">
+              <textarea id="headerInput" placeholder="Paste raw email headers here (in most mail clients: 'Show original' or 'View source')..."></textarea>
+            </div>
+            <span class="sample-link" id="sampleBtn">Load a sample</span>
+          </div>
+
+          <button class="btn btn-primary analyze-btn" id="analyzeBtn" disabled>🔍 Analyze Email</button>
+
+          <div class="disclaimer"><b>Disclaimer:</b> Results are provided "as is" based on available threat intelligence and analysis. Always verify independently before taking action on a suspicious message.</div>
+
+          <div class="results-wrap" id="resultsWrap"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-left"><svg class="mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M18,12 L50,82 L82,12 L67,12 L50,52 L33,12 Z" fill="#534AB7"/><circle cx="50" cy="50" r="7" fill="none" stroke="#534AB7" stroke-width="2.5"/><line x1="50" y1="50" x2="68" y2="30" stroke="#534AB7" stroke-width="2.5"/><circle cx="68" cy="30" r="3" fill="#534AB7"/></svg><span class="mono" style="font-size:12px;color:var(--text-faint);">VETARI © 2026</span></div>
+    <p>Human Risk · Investigation · Security · Trawl</p>
+  </div>
+</footer>
+
+<script>
+// ============================================================
+// TODO: point this at your real Trawl API base URL.
+// Do NOT hardcode a secret API key here — this file is public.
+// Use a scoped client token meant for browser use, or proxy this
+// request through your own backend so the real credential never
+// reaches the browser.
+// ============================================================
+const TRAWL_API_BASE = "https://api.trawl.io/v1";
+
+// ---------- tab switching ----------
+const tabUpload = document.getElementById('tabUpload');
+const tabHeader = document.getElementById('tabHeader');
+const uploadPane = document.getElementById('uploadPane');
+const headerPane = document.getElementById('headerPane');
+let activeMode = 'upload';
+
+function setMode(mode){
+  activeMode = mode;
+  tabUpload.classList.toggle('active', mode === 'upload');
+  tabHeader.classList.toggle('active', mode === 'header');
+  uploadPane.style.display = mode === 'upload' ? 'block' : 'none';
+  headerPane.style.display = mode === 'header' ? 'block' : 'none';
+  updateAnalyzeState();
+}
+tabUpload.addEventListener('click', () => setMode('upload'));
+tabHeader.addEventListener('click', () => setMode('header'));
+
+// ---------- file upload ----------
+const dropZone = document.getElementById('dropZone');
+const fileInput = document.getElementById('fileInput');
+const fileList = document.getElementById('fileList');
+const fileError = document.getElementById('fileError');
+let selectedFiles = [];
+
+dropZone.addEventListener('click', () => fileInput.click());
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+dropZone.addEventListener('drop', e => {
+  e.preventDefault();
+  dropZone.classList.remove('dragover');
+  handleFiles(e.dataTransfer.files);
+});
+fileInput.addEventListener('change', () => handleFiles(fileInput.files));
+
+function handleFiles(fileListInput){
+  fileError.style.display = 'none';
+  const incoming = Array.from(fileListInput);
+  for(const f of incoming){
+    const ext = f.name.split('.').pop().toLowerCase();
+    if(!['eml','msg'].includes(ext)){
+      showFileError(`"${f.name}" isn't a .eml or .msg file.`);
+      continue;
+    }
+    if(f.size > 5 * 1024 * 1024){
+      showFileError(`"${f.name}" is over the 5MB limit.`);
+      continue;
+    }
+    if(selectedFiles.length >= 5){
+      showFileError('You can upload up to 5 files at once.');
+      break;
+    }
+    selectedFiles.push(f);
+  }
+  renderFileList();
+  updateAnalyzeState();
+}
+
+function showFileError(msg){
+  fileError.textContent = msg;
+  fileError.style.display = 'block';
+}
+
+function renderFileList(){
+  fileList.innerHTML = '';
+  selectedFiles.forEach((f, i) => {
+    const kb = (f.size / 1024).toFixed(0);
+    const chip = document.createElement('div');
+    chip.className = 'file-chip';
+    chip.innerHTML = `<span class="fn">${f.name}</span><span style="display:flex;align-items:center;"><span class="fs">${kb} KB</span><span class="fx" data-i="${i}">✕</span></span>`;
+    fileList.appendChild(chip);
+  });
+  fileList.querySelectorAll('.fx').forEach(el => {
+    el.addEventListener('click', () => {
+      selectedFiles.splice(parseInt(el.dataset.i), 1);
+      renderFileList();
+      updateAnalyzeState();
+    });
+  });
+}
+
+// ---------- header paste ----------
+const headerInput = document.getElementById('headerInput');
+headerInput.addEventListener('input', updateAnalyzeState);
+
+const sampleHeaders = `Delivered-To: jane@example.com
+Received: by 2002:a05:6a00:abcd::1 with SMTP id x1csp1234;
+        Mon, 20 Jul 2026 03:12:44 -0700 (PDT)
+Received: from mail-relay-09.northline-corp-secure.com (mail-relay-09.northline-corp-secure.com [185.23.44.109])
+        by mx.example.com with ESMTPS id q7si9182;
+        Mon, 20 Jul 2026 03:12:43 -0700 (PDT)
+Authentication-Results: mx.example.com;
+       spf=fail (google.com: domain of it-support@northline-corp-secure.com does not designate 185.23.44.109 as permitted sender) smtp.mailfrom=it-support@northline-corp-secure.com;
+       dkim=none;
+       dmarc=fail (p=REJECT sp=REJECT dis=NONE) header.from=northline-corp.com
+From: "IT Helpdesk" <it-support@northline-corp-secure.com>
+Reply-To: recovery@mailbox-secure-check.net
+Return-Path: <bounce@northline-corp-secure.com>
+To: jane@example.com
+Subject: Action required: verify your mailbox in the next 2 hours
+Date: Mon, 20 Jul 2026 10:12:40 +0000
+Message-ID: <8f2c1e90-northline@mailbox-secure-check.net>`;
+
+document.getElementById('sampleBtn').addEventListener('click', () => {
+  headerInput.value = sampleHeaders;
+  updateAnalyzeState();
+});
+
+function updateAnalyzeState(){
+  const analyzeBtn = document.getElementById('analyzeBtn');
+  if(activeMode === 'upload'){
+    analyzeBtn.disabled = selectedFiles.length === 0;
+  } else {
+    analyzeBtn.disabled = headerInput.value.trim().length === 0;
+  }
+}
+
+// ---------- header parsing (local fallback engine) ----------
+function parseHeaders(raw){
+  const rawLines = raw.replace(/\r\n/g, '\n').split('\n');
+  const lines = [];
+  for(const line of rawLines){
+    if(line.trim() === '') break; // stop at end of header block
+    if(/^\s/.test(line) && lines.length){
+      lines[lines.length - 1] += ' ' + line.trim();
+    } else {
+      lines.push(line);
+    }
+  }
+  const headers = {};
+  const received = [];
+  lines.forEach(line => {
+    const m = line.match(/^([A-Za-z\-]+):\s*(.*)$/);
+    if(!m) return;
+    const key = m[1].toLowerCase();
+    const val = m[2];
+    if(key === 'received'){
+      received.push(val);
+    } else if(headers[key]){
+      headers[key] += ' | ' + val;
+    } else {
+      headers[key] = val;
+    }
+  });
+  return { headers, received };
+}
+function extractDomain(addr){
+  const m = (addr || '').match(/@([a-zA-Z0-9.\-]+)/);
+  return m ? m[1].toLowerCase() : null;
+}
+function extractEmail(field){
+  const m = (field || '').match(/<([^>]+)>/) || (field || '').match(/([\w.\-+]+@[\w.\-]+)/);
+  return m ? m[1] : field;
+}
+
+function buildLocalAnalysis(raw){
+  const { headers, received } = parseHeaders(raw);
+  const fromEmail = extractEmail(headers['from']);
+  const replyTo = extractEmail(headers['reply-to']);
+  const returnPath = extractEmail(headers['return-path']);
+  const fromDomain = extractDomain(fromEmail);
+  const replyDomain = replyTo ? extractDomain(replyTo) : null;
+  const returnDomain = returnPath ? extractDomain(returnPath) : null;
+  const auth = headers['authentication-results'] || '';
+  const spfMatch = auth.match(/spf=(\w+)/i);
+  const dkimMatch = auth.match(/dkim=(\w+)/i);
+  const dmarcMatch = auth.match(/dmarc=(\w+)/i);
+
+  const flags = [];
+  if(replyDomain && fromDomain && replyDomain !== fromDomain){
+    flags.push({level:'warn', text:`Reply-To domain (${replyDomain}) does not match From domain (${fromDomain}).`});
+  }
+  if(returnDomain && fromDomain && returnDomain !== fromDomain){
+    flags.push({level:'warn', text:`Return-Path domain (${returnDomain}) does not match From domain (${fromDomain}).`});
+  }
+  if(spfMatch && spfMatch[1].toLowerCase() !== 'pass'){
+    flags.push({level:'warn', text:`SPF result: ${spfMatch[1]}.`});
+  } else if(spfMatch){ flags.push({level:'ok', text:'SPF passed.'}); }
+  if(dkimMatch && dkimMatch[1].toLowerCase() !== 'pass'){
+    flags.push({level:'warn', text:`DKIM result: ${dkimMatch[1]}.`});
+  } else if(dkimMatch){ flags.push({level:'ok', text:'DKIM passed.'}); }
+  if(dmarcMatch && dmarcMatch[1].toLowerCase() !== 'pass'){
+    flags.push({level:'warn', text:`DMARC result: ${dmarcMatch[1]}.`});
+  } else if(dmarcMatch){ flags.push({level:'ok', text:'DMARC passed.'}); }
+  if(!auth){ flags.push({level:'warn', text:'No Authentication-Results header found.'}); }
+  if(received.length === 0){ flags.push({level:'warn', text:'No Received headers found.'}); }
+  if(flags.length === 0){ flags.push({level:'ok', text:'No obvious red flags found in the fields we check.'}); }
+
+  let html = '';
+  html += `<div class="res-row"><span class="rk">From</span><span class="rv">${headers['from'] || '—'}</span></div>`;
+  if(headers['reply-to']) html += `<div class="res-row"><span class="rk">Reply-To</span><span class="rv">${headers['reply-to']}</span></div>`;
+  if(headers['return-path']) html += `<div class="res-row"><span class="rk">Return-Path</span><span class="rv">${headers['return-path']}</span></div>`;
+  html += `<div class="res-row"><span class="rk">Subject</span><span class="rv">${headers['subject'] || '—'}</span></div>`;
+  html += `<div class="res-row"><span class="rk">Date</span><span class="rv">${headers['date'] || '—'}</span></div>`;
+  html += '<div class="flag-box">';
+  flags.forEach(f => { html += `<div class="flag ${f.level}"><span class="fi">${f.level === 'warn' ? '▲' : '✓'}</span><span>${f.text}</span></div>`; });
+  html += '</div>';
+  if(received.length){
+    html += '<div class="chain"><h4>Delivery path (most recent hop first)</h4>';
+    received.slice(0, 6).forEach((hop, i) => { html += `<div class="hop"><span class="n">#${i+1}</span>${hop.length > 140 ? hop.slice(0,140) + '…' : hop}</div>`; });
+    html += '</div>';
+  }
+  return html;
+}
+
+// ---------- Trawl API calls (placeholders) ----------
+async function requestScanFromHeaders(raw){
+  const res = await fetch(`${TRAWL_API_BASE}/scans`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ rawHeaders: raw })
+  });
+  if(!res.ok) throw new Error('API request failed');
+  return res.json(); // expected: { id, riskLevel, findings, summary }
+}
+
+async function requestScanFromFiles(files){
+  const form = new FormData();
+  files.forEach(f => form.append('emails', f));
+  const res = await fetch(`${TRAWL_API_BASE}/scans/upload`, {
+    method: 'POST',
+    body: form
+  });
+  if(!res.ok) throw new Error('API request failed');
+  return res.json(); // expected: { results: [{ id, filename, riskLevel, findings }] }
+}
+
+function scanCardShell(filename, badgeHtml, bodyHtml, scanId){
+  return `
+    <div class="result-card">
+      <div class="rh"><span class="fname">${filename}</span>${badgeHtml}</div>
+      ${bodyHtml}
+      <div class="row-actions">
+        <button class="report-btn" data-id="${scanId || ''}">Report to Trawl</button>
+        <button class="download-btn" data-id="${scanId || ''}">Download report</button>
+      </div>
+      <div class="row-status"></div>
+    </div>`;
+}
+
+function wireRowActions(container){
+  container.querySelectorAll('.report-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const statusEl = btn.closest('.result-card').querySelector('.row-status');
+      const id = btn.dataset.id;
+      if(!id){ statusEl.textContent = "Not available in demo mode — connect the Trawl API to enable it."; return; }
+      statusEl.textContent = 'Submitting report...';
+      try{
+        const res = await fetch(`${TRAWL_API_BASE}/scans/${id}/report`, { method: 'POST' });
+        if(!res.ok) throw new Error();
+        statusEl.textContent = 'Reported to Trawl.';
+      } catch(e){ statusEl.textContent = "Couldn't submit the report — try again shortly."; }
+    });
+  });
+  container.querySelectorAll('.download-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const statusEl = btn.closest('.result-card').querySelector('.row-status');
+      const id = btn.dataset.id;
+      if(!id){ statusEl.textContent = "Not available in demo mode — connect the Trawl API to enable it."; return; }
+      statusEl.textContent = 'Preparing report...';
+      try{
+        const res = await fetch(`${TRAWL_API_BASE}/scans/${id}/report/download`);
+        if(!res.ok) throw new Error();
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url; a.download = `trawl-scan-${id}.pdf`; a.click();
+        URL.revokeObjectURL(url);
+        statusEl.textContent = '';
+      } catch(e){ statusEl.textContent = "Couldn't download the report — try again shortly."; }
+    });
+  });
+}
+
+// ---------- analyze ----------
+document.getElementById('analyzeBtn').addEventListener('click', async () => {
+  const analyzeBtn = document.getElementById('analyzeBtn');
+  const resultsWrap = document.getElementById('resultsWrap');
+  const original = analyzeBtn.textContent;
+  analyzeBtn.textContent = 'Scanning...';
+  analyzeBtn.disabled = true;
+  resultsWrap.innerHTML = '';
+
+  if(activeMode === 'header'){
+    const raw = headerInput.value.trim();
+    try{
+      const scan = await requestScanFromHeaders(raw);
+      resultsWrap.innerHTML = scanCardShell('Pasted headers', '', buildLocalAnalysis(raw), scan.id);
+    } catch(e){
+      resultsWrap.innerHTML = scanCardShell('Pasted headers', '<span class="badge demo">DEMO MODE</span>', buildLocalAnalysis(raw), null);
+    }
+    wireRowActions(resultsWrap);
+  } else {
+    let apiResults = null;
+    try{
+      const scan = await requestScanFromFiles(selectedFiles);
+      apiResults = scan.results;
+    } catch(e){ /* fall through to per-file local handling */ }
+
+    for(let i = 0; i < selectedFiles.length; i++){
+      const f = selectedFiles[i];
+      const ext = f.name.split('.').pop().toLowerCase();
+      const apiResult = apiResults ? apiResults[i] : null;
+
+      if(apiResult){
+        resultsWrap.innerHTML += scanCardShell(f.name, '', `<div class="placeholder-msg">Scored by Trawl — risk level: ${apiResult.riskLevel || 'unknown'}.</div>`, apiResult.id);
+      } else if(ext === 'eml'){
+        const text = await f.text();
+        resultsWrap.innerHTML += scanCardShell(f.name, '<span class="badge demo">DEMO MODE — LOCAL PARSE</span>', buildLocalAnalysis(text), null);
+      } else {
+        resultsWrap.innerHTML += scanCardShell(f.name, '<span class="badge pending">AWAITING API CONNECTION</span>', '<div class="placeholder-msg">.msg files require the Trawl backend to parse — connect the API to analyze this file.</div>', null);
+      }
+    }
+    wireRowActions(resultsWrap);
+  }
+
+  analyzeBtn.textContent = original;
+  analyzeBtn.disabled = false;
+});
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="bg-network.js"></script>
+
+</body>
+</html>

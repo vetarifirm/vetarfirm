@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resources — Vetari</title>
+<meta name="description" content="Free security tools, guides, and a glossary from Vetari — phishing quiz, email header analyzer, and how to report phishing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="vetari-logo.png">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .res-hero{ padding:168px 0 80px; border-bottom:1px solid var(--border-soft); }
+  .res-hero h1{ font-size:clamp(32px,4.4vw,52px); line-height:1.08; margin:18px 0 22px; max-width:720px; }
+  .res-hero p.lede{ font-size:17px; color:var(--text-muted); max-width:580px; }
+
+  /* tools */
+  .tools{ padding:100px 0; border-bottom:1px solid var(--border-soft); }
+  .tool-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border-soft); border:1px solid var(--border-soft); margin-top:56px; }
+  .tool-card{ background:var(--bg); padding:28px 24px; display:flex; flex-direction:column; min-height:230px; text-decoration:none; transition:background .15s ease; }
+  .tool-card:hover{ background:var(--bg-panel-2); }
+  .tool-card .tc-id{ font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--amber); margin-bottom:16px; }
+  .tool-card.soon .tc-id{ color:var(--text-faint); }
+  .tool-card h3{ font-size:16.5px; margin-bottom:10px; color:var(--text); }
+  .tool-card p{ color:var(--text-muted); font-size:13.5px; flex:1; }
+  .tool-card .tc-cta{ margin-top:16px; font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--teal); }
+  .tool-card.soon .tc-cta{ color:var(--text-faint); }
+  .tool-badge{
+    display:inline-block; font-family:'IBM Plex Mono', monospace; font-size:10px;
+    letter-spacing:.06em; padding:3px 8px; border-radius:2px; margin-bottom:14px;
+    border:1px solid var(--border); color:var(--text-faint); width:fit-content;
+  }
+  .tool-badge.live{ color:var(--teal); border-color:rgba(69,184,166,0.35); }
+
+  /* guides */
+  .guides{ padding:100px 0; border-bottom:1px solid var(--border-soft); }
+  .guide-list{ margin-top:56px; display:flex; flex-direction:column; gap:1px; background:var(--border-soft); border:1px solid var(--border-soft); }
+  .guide{ background:var(--bg); padding:26px 28px; }
+  .guide summary{ cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:16px; font-size:16px; font-family:'Space Grotesk',sans-serif; font-weight:600; }
+  .guide summary::-webkit-details-marker{ display:none; }
+  .guide summary .plus{ font-family:'IBM Plex Mono', monospace; color:var(--amber); font-size:18px; flex:none; transition:transform .15s ease; }
+  .guide[open] summary .plus{ transform:rotate(45deg); }
+  .guide .g-body{ margin-top:16px; color:var(--text-muted); font-size:14.5px; max-width:720px; }
+  .guide .g-body p{ margin-bottom:12px; }
+  .guide .g-body p:last-child{ margin-bottom:0; }
+
+  /* glossary */
+  .glossary{ padding:100px 0; border-bottom:1px solid var(--border-soft); }
+  .gl-search{
+    margin-top:40px; margin-bottom:8px;
+    background:var(--bg-panel); border:1px solid var(--border); border-radius:3px;
+    padding:12px 14px; width:100%; max-width:360px; color:var(--text);
+    font-family:'IBM Plex Sans',sans-serif; font-size:14px; outline:none;
+  }
+  .gl-search:focus{ border-color:var(--amber); }
+  .gl-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:0; margin-top:24px; }
+  .gl-term{ padding:18px 24px 18px 0; border-top:1px solid var(--border-soft); }
+  .gl-term:nth-child(odd){ padding-right:32px; }
+  .gl-term dt{ font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--amber); margin-bottom:6px; }
+  .gl-term dd{ font-size:13.5px; color:var(--text-muted); }
+
+  /* blog */
+  .blog{ padding:100px 0 120px; }
+  .blog-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border-soft); border:1px solid var(--border-soft); margin-top:56px; }
+  .blog-card{ background:var(--bg); padding:26px 24px; min-height:150px; display:flex; flex-direction:column; justify-content:space-between; }
+  .blog-card .bc-tag{ font-family:'IBM Plex Mono', monospace; font-size:10.5px; color:var(--text-faint); border:1px solid var(--border); padding:3px 8px; border-radius:2px; width:fit-content; margin-bottom:16px; }
+  .blog-card h4{ font-size:15px; color:var(--text-muted); font-weight:500; font-family:'IBM Plex Sans',sans-serif; }
+
+  @media (max-width: 860px){
+    .tool-grid{ grid-template-columns:1fr 1fr; }
+    .gl-grid{ grid-template-columns:1fr; }
+    .gl-term:nth-child(odd){ padding-right:0; }
+    .blog-grid{ grid-template-columns:1fr; }
+  }
+  @media (max-width: 520px){
+    .tool-grid{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="index.html" class="logo"><svg class="mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M18,12 L50,82 L82,12 L67,12 L50,52 L33,12 Z" fill="#534AB7"/><circle cx="50" cy="50" r="7" fill="none" stroke="#534AB7" stroke-width="2.5"/><line x1="50" y1="50" x2="68" y2="30" stroke="#534AB7" stroke-width="2.5"/><circle cx="68" cy="30" r="3" fill="#534AB7"/></svg>VETARI</a>
+    <div class="navlinks">
+      <a href="about.html">About</a>
+      <a href="solutions.html">Solutions</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="resources.html" style="color:var(--text);">Resources</a>
+    </div>
+    <a href="index.html#waitlist" class="btn btn-primary">Join waitlist</a>
+  </nav>
+</header>
+
+<main>
+  <section class="res-hero">
+    <div class="wrap">
+      <div class="eyebrow">Resources</div>
+      <h1>Free tools and <span class="grad">reference material for spotting risk early.</span></h1>
+      <p class="lede">Test yourself, check a suspicious email, or report one — no account or waitlist signup required for the tools below.</p>
+    </div>
+  </section>
+
+  <section class="tools">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Tools you can use right now.</h2>
+        <p>Built to be genuinely useful, not just a lead form in disguise.</p>
+      </div>
+      <div class="tool-grid">
+        <a class="tool-card" href="phishing-quiz.html">
+          <span class="tool-badge live">LIVE</span>
+          <h3>Phishing Awareness Quiz</h3>
+          <p>Six realistic scenarios. See how many you'd catch before they landed in your inbox.</p>
+          <span class="tc-cta">Take the quiz →</span>
+        </a>
+        <a class="tool-card" href="email-header-analyzer.html">
+          <span class="tool-badge live">LIVE</span>
+          <h3>Email Analyzer</h3>
+          <p>Upload a suspicious .eml/.msg file or paste headers — Trawl checks sender authenticity, SPF/DKIM/DMARC, and links.</p>
+          <span class="tc-cta">Analyze headers →</span>
+        </a>
+        <a class="tool-card soon" href="index.html#trawl">
+          <span class="tool-badge">LAUNCHING WITH TRAWL</span>
+          <h3>Email Spoofing Test</h3>
+          <p>Send a controlled spoof test to your own domain to see if it lands in the inbox. Needs live sending infrastructure, so this ships with Trawl access.</p>
+          <span class="tc-cta">See Trawl →</span>
+        </a>
+        <a class="tool-card" href="report-phishing.html">
+          <span class="tool-badge live">LIVE</span>
+          <h3>Report a Phishing Email</h3>
+          <p>Describe or paste a suspicious email and get guidance on what to do next.</p>
+          <span class="tc-cta">Report an email →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="guides">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Guides.</h2>
+        <p>Short, practical reads — no signup required.</p>
+      </div>
+      <div class="guide-list">
+        <details class="guide" open>
+          <summary>How to spot a phishing email in under 10 seconds<span class="plus">+</span></summary>
+          <div class="g-body">
+            <p>Most phishing emails share a handful of tells: a sender domain that's close to, but not exactly, the real one; urgency language ("act within 24 hours" or "your account will be suspended"); a generic greeting instead of your name; and a link that, when you hover over it, doesn't match the text or the organization it claims to be from.</p>
+            <p>The fastest check is the sender's actual email address, not just the display name — display names are trivial to fake. If anything asks you to act immediately or bypass a normal process, slow down and verify through a channel you already trust, like calling a known number rather than one in the email.</p>
+          </div>
+        </details>
+        <details class="guide">
+          <summary>What OSINT can reveal about your organization<span class="plus">+</span></summary>
+          <div class="g-body">
+            <p>Open-source intelligence pulls together everything about your organization that's already publicly discoverable — employee names and roles from social media, exposed subdomains and infrastructure, leaked credentials from past breaches, and metadata buried in public documents.</p>
+            <p>None of it requires breaking in anywhere. That's exactly why it matters: an attacker doing reconnaissance before a targeted phishing campaign or social engineering attempt is running the same searches. Knowing what's exposed is the first step to reducing it.</p>
+          </div>
+        </details>
+        <details class="guide">
+          <summary>VAPT vs. a vulnerability scan — they're not the same thing<span class="plus">+</span></summary>
+          <div class="g-body">
+            <p>A vulnerability scan is automated: a tool checks your systems against a database of known issues and produces a list. It's fast and useful, but it doesn't tell you whether those issues are actually exploitable in your specific environment, or what an attacker could do once inside.</p>
+            <p>Penetration testing adds a human element — someone actively trying to chain smaller weaknesses together the way a real attacker would, to see how far they can actually get. Most mature security programs use both: scanning for continuous coverage, testing for real-world validation.</p>
+          </div>
+        </details>
+        <details class="guide">
+          <summary>Building a security awareness program people don't tune out<span class="plus">+</span></summary>
+          <div class="g-body">
+            <p>Annual training modules tend to fail for a simple reason: they're disconnected from what people actually experience day to day. By the time a real phishing email arrives, the training is a distant memory.</p>
+            <p>Programs that stick tend to share three traits: they're continuous rather than annual, they use real (simulated) scenarios instead of abstract slides, and they respond to behavior — someone who clicks a simulated phish gets short, targeted follow-up training, not the same generic course as everyone else.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="glossary">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Glossary.</h2>
+        <p>Plain-language definitions for terms used across our services.</p>
+      </div>
+      <input class="gl-search" id="glSearch" type="text" placeholder="Search terms...">
+      <dl class="gl-grid" id="glGrid">
+        <div class="gl-term"><dt>OSINT</dt><dd>Open-Source Intelligence — information gathered from publicly available sources rather than hacking or insider access.</dd></div>
+        <div class="gl-term"><dt>Due Diligence</dt><dd>The process of verifying facts about a person, vendor, or organization before entering into a deal, hire, or partnership.</dd></div>
+        <div class="gl-term"><dt>VAPT</dt><dd>Vulnerability Assessment &amp; Penetration Testing — combined automated scanning and manual testing to find exploitable weaknesses.</dd></div>
+        <div class="gl-term"><dt>Penetration Testing</dt><dd>Authorized, simulated attacks on a system to find and demonstrate real-world exploitable vulnerabilities.</dd></div>
+        <div class="gl-term"><dt>Social Engineering</dt><dd>Manipulating a person, rather than a system, into taking an action that compromises security — like clicking a link or sharing a password.</dd></div>
+        <div class="gl-term"><dt>Pretexting</dt><dd>Creating a fabricated scenario or identity to trick someone into giving up information or access.</dd></div>
+        <div class="gl-term"><dt>Phishing</dt><dd>Fraudulent messages, usually email, designed to trick someone into revealing credentials or installing malware.</dd></div>
+        <div class="gl-term"><dt>Spear Phishing</dt><dd>A phishing attempt targeted at a specific person or organization, using details that make it more convincing than a generic attempt.</dd></div>
+        <div class="gl-term"><dt>SPF</dt><dd>Sender Policy Framework — a DNS record listing which mail servers are allowed to send email for a domain.</dd></div>
+        <div class="gl-term"><dt>DKIM</dt><dd>DomainKeys Identified Mail — a cryptographic signature added to outgoing email that lets receivers verify it wasn't altered in transit.</dd></div>
+        <div class="gl-term"><dt>DMARC</dt><dd>A policy that tells receiving mail servers what to do when a message fails SPF or DKIM checks — and reports on it.</dd></div>
+        <div class="gl-term"><dt>Attack Surface</dt><dd>Every point — technical or human — where an unauthorized user could try to gain access to a system or organization.</dd></div>
+        <div class="gl-term"><dt>Threat Actor</dt><dd>An individual or group responsible for, or capable of, carrying out an attack against a system or organization.</dd></div>
+        <div class="gl-term"><dt>Red Team / Blue Team</dt><dd>Red team simulates attackers; blue team defends. Testing both sides sharpens real-world readiness.</dd></div>
+        <div class="gl-term"><dt>Zero-Day</dt><dd>A vulnerability that's exploited before the vendor has released a fix — meaning there's "zero days" of protection.</dd></div>
+        <div class="gl-term"><dt>MFA</dt><dd>Multi-Factor Authentication — requiring more than one form of verification (like a password plus a code) to log in.</dd></div>
+        <div class="gl-term"><dt>Human Risk Assessment</dt><dd>An evaluation of how susceptible an organization's people are to manipulation, social engineering, or process failure.</dd></div>
+        <div class="gl-term"><dt>Business Email Compromise (BEC)</dt><dd>An attack where a threat actor impersonates a trusted contact, often an executive, to trick someone into a wire transfer or data leak.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="blog">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Articles.</h2>
+        <p>We're building out longer-form content — check back soon.</p>
+      </div>
+      <div class="blog-grid">
+        <div class="blog-card"><span class="bc-tag">COMING SOON</span><h4>Notes from the field on OSINT &amp; investigations</h4></div>
+        <div class="blog-card"><span class="bc-tag">COMING SOON</span><h4>What we see most often in VAPT engagements</h4></div>
+        <div class="blog-card"><span class="bc-tag">COMING SOON</span><h4>Building a human risk program that holds up</h4></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-left"><svg class="mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M18,12 L50,82 L82,12 L67,12 L50,52 L33,12 Z" fill="#534AB7"/><circle cx="50" cy="50" r="7" fill="none" stroke="#534AB7" stroke-width="2.5"/><line x1="50" y1="50" x2="68" y2="30" stroke="#534AB7" stroke-width="2.5"/><circle cx="68" cy="30" r="3" fill="#534AB7"/></svg><span class="mono" style="font-size:12px;color:var(--text-faint);">VETARI © 2026</span></div>
+    <p>Human Risk · Investigation · Security · Trawl</p>
+  </div>
+</footer>
+
+<script>
+  const glSearch = document.getElementById('glSearch');
+  const glItems = document.querySelectorAll('.gl-term');
+  glSearch.addEventListener('input', () => {
+    const q = glSearch.value.toLowerCase();
+    glItems.forEach(item => {
+      const text = item.textContent.toLowerCase();
+      item.style.display = text.includes(q) ? '' : 'none';
+    });
+  });
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="bg-network.js"></script>
+
+</body>
+</html>

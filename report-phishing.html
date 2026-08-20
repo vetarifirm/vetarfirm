@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Report a Phishing Email — Vetari</title>
+<meta name="description" content="Report a suspicious or phishing email to Vetari and get guidance on what to do next.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="vetari-logo.png">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .rp-hero{ padding:168px 0 60px; border-bottom:1px solid var(--border-soft); }
+  .rp-hero h1{ font-size:clamp(28px,4vw,42px); margin:16px 0 14px; max-width:640px; }
+  .rp-hero p{ color:var(--text-muted); font-size:15.5px; max-width:560px; }
+
+  .rp-body{ padding:70px 0 130px; }
+  .rp-grid{ display:grid; grid-template-columns:1fr 1.3fr; gap:48px; align-items:start; }
+
+  .rp-side h3{ font-size:15px; margin-bottom:16px; font-family:'Space Grotesk',sans-serif; }
+  .rp-checklist{ list-style:none; }
+  .rp-checklist li{
+    display:flex; gap:10px; font-size:13.5px; color:var(--text-muted);
+    padding:11px 0; border-top:1px solid var(--border-soft);
+  }
+  .rp-checklist li:first-child{ border-top:none; }
+  .rp-checklist li span.n{ font-family:'IBM Plex Mono', monospace; color:var(--amber); flex:none; }
+
+  form.rp-form{
+    background:var(--bg-panel); border:1px solid var(--border); border-radius:4px; padding:28px;
+  }
+  .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px; }
+  .field{ display:flex; flex-direction:column; gap:6px; }
+  .field label{ font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--text-faint); text-transform:uppercase; letter-spacing:.06em; }
+  .field input, .field select, .field textarea{
+    background:var(--bg-panel-2); border:1px solid var(--border); color:var(--text);
+    padding:12px; border-radius:3px; font-family:'IBM Plex Sans',sans-serif; font-size:14px; outline:none;
+  }
+  .field textarea{ font-family:'IBM Plex Mono', monospace; font-size:12.5px; min-height:120px; resize:vertical; }
+  .field input:focus, .field select:focus, .field textarea:focus{ border-color:var(--amber); }
+  .field.full{ grid-column:1/-1; }
+  .rp-form .btn-primary{ width:100%; justify-content:center; padding:13px; font-size:14px; margin-top:6px; }
+  .form-note{ font-size:12px; color:var(--text-faint); margin-top:14px; text-align:center; }
+  #rp-error{ display:none; color:#E28C7A; font-family:'IBM Plex Mono', monospace; font-size:12px; margin-top:12px; text-align:center; }
+
+  #rp-success{ display:none; background:var(--bg-panel); border:1px solid rgba(69,184,166,0.4); border-radius:4px; padding:32px 28px; text-align:center; }
+  #rp-success .mono{ color:var(--teal); font-size:12px; letter-spacing:.08em; }
+  #rp-success h3{ margin:12px 0 6px; font-size:19px; }
+  #rp-success p{ color:var(--text-muted); font-size:14px; }
+
+  @media (max-width: 860px){ .rp-grid{ grid-template-columns:1fr; } }
+  @media (max-width: 520px){ .form-row{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="index.html" class="logo"><svg class="mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M18,12 L50,82 L82,12 L67,12 L50,52 L33,12 Z" fill="#534AB7"/><circle cx="50" cy="50" r="7" fill="none" stroke="#534AB7" stroke-width="2.5"/><line x1="50" y1="50" x2="68" y2="30" stroke="#534AB7" stroke-width="2.5"/><circle cx="68" cy="30" r="3" fill="#534AB7"/></svg>VETARI</a>
+    <div class="navlinks">
+      <a href="about.html">About</a>
+      <a href="solutions.html">Solutions</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="resources.html" style="color:var(--text);">Resources</a>
+    </div>
+    <a href="index.html#waitlist" class="btn btn-primary">Join waitlist</a>
+  </nav>
+</header>
+
+<main>
+  <section class="rp-hero">
+    <div class="wrap">
+      <div class="eyebrow">Free tool</div>
+      <h1>Report a Phishing Email</h1>
+      <p>Tell us what you received and we'll get back to you with guidance. If you're part of an organization already working with Trawl, this also helps flag the campaign for your team.</p>
+    </div>
+  </section>
+
+  <section class="rp-body">
+    <div class="wrap rp-grid">
+      <div class="rp-side">
+        <h3>Before you do anything else</h3>
+        <ul class="rp-checklist">
+          <li><span class="n">01</span>Don't click any links or open attachments in the email.</li>
+          <li><span class="n">02</span>Don't reply to the sender, even to ask questions.</li>
+          <li><span class="n">03</span>If it claims to be from someone you know, verify through a different channel — call them, don't use contact details from the email.</li>
+          <li><span class="n">04</span>If you already clicked a link or entered credentials, change that password immediately and notify your IT or security team.</li>
+          <li><span class="n">05</span>Forward the full email, including headers if possible, using the form here or to your internal security team.</li>
+        </ul>
+      </div>
+
+      <div>
+        <form class="rp-form" id="reportForm">
+          <div class="form-row">
+            <div class="field">
+              <label for="rname">Your name</label>
+              <input type="text" id="rname" name="name" required placeholder="Jane Doe">
+            </div>
+            <div class="field">
+              <label for="remail">Your email</label>
+              <input type="email" id="remail" name="email" required placeholder="jane@company.com">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="sender">Suspicious sender address</label>
+              <input type="text" id="sender" name="sender" placeholder="e.g. it-support@lookalike-domain.com">
+            </div>
+            <div class="field">
+              <label for="channel">Where you received it</label>
+              <select id="channel" name="channel">
+                <option>Email</option>
+                <option>SMS / text</option>
+                <option>Phone call</option>
+                <option>Social media</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field full">
+              <label for="subject">Subject line</label>
+              <input type="text" id="subject" name="subject" placeholder="What was the subject or topic?">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field full">
+              <label for="description">What happened</label>
+              <textarea id="description" name="description" placeholder="Briefly describe the message and anything you clicked or entered." required></textarea>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field full">
+              <label for="headers">Paste headers or the full message (optional)</label>
+              <textarea id="headers" name="headers" placeholder="Paste raw content here if you have it — this helps us investigate faster."></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit report</button>
+          <div class="form-note">Reports are reviewed by our team. This isn't a substitute for notifying your own IT/security team if you're part of an organization.</div>
+          <div id="rp-error"></div>
+        </form>
+
+        <div id="rp-success">
+          <div class="mono">REPORT RECEIVED</div>
+          <h3>Thanks — we've got it.</h3>
+          <p>We'll follow up if we need more detail. If this affects your organization, loop in your internal security or IT team as well.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-left"><svg class="mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M18,12 L50,82 L82,12 L67,12 L50,52 L33,12 Z" fill="#534AB7"/><circle cx="50" cy="50" r="7" fill="none" stroke="#534AB7" stroke-width="2.5"/><line x1="50" y1="50" x2="68" y2="30" stroke="#534AB7" stroke-width="2.5"/><circle cx="68" cy="30" r="3" fill="#534AB7"/></svg><span class="mono" style="font-size:12px;color:var(--text-faint);">VETARI © 2026</span></div>
+    <p>Human Risk · Investigation · Security · Trawl</p>
+  </div>
+</footer>
+
+<script>
+  // NOTE: replace YOUR_FORM_ID below with a real Formspree (or similar) form ID before going live.
+  const FORM_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+
+  const form = document.getElementById('reportForm');
+  const successEl = document.getElementById('rp-success');
+  const errorEl = document.getElementById('rp-error');
+
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    errorEl.style.display = 'none';
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Submitting...';
+    submitBtn.disabled = true;
+
+    const data = {
+      name: form.name.value,
+      email: form.email.value,
+      sender: form.sender.value,
+      channel: form.channel.value,
+      subject: form.subject.value,
+      description: form.description.value,
+      headers: form.headers.value
+    };
+
+    try{
+      const res = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      if(!res.ok) throw new Error('Submission failed');
+      form.style.display = 'none';
+      successEl.style.display = 'block';
+    } catch(err){
+      errorEl.style.display = 'block';
+      errorEl.textContent = 'Form isn\'t connected yet — email us directly at report@vetari.com and we\'ll take it from there.';
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
+    }
+  });
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="bg-network.js"></script>
+
+</body>
+</html>
