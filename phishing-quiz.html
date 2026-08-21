@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phishing Awareness Quiz — Vetari</title>
+<meta name="description" content="Six realistic email scenarios. Test how well you'd catch a phishing attempt.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="vetari-logo.png">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .quiz-hero{ padding:168px 0 60px; border-bottom:1px solid var(--border-soft); text-align:center; }
+  .quiz-hero h1{ font-size:clamp(28px,4vw,42px); margin:16px 0 14px; }
+  .quiz-hero p{ color:var(--text-muted); font-size:15.5px; max-width:520px; margin:0 auto; }
+
+  .quiz-wrap{ padding:70px 0 130px; }
+  .quiz-shell{ max-width:640px; margin:0 auto; }
+
+  .progress{ display:flex; gap:6px; margin-bottom:28px; }
+  .progress span{ height:3px; flex:1; background:var(--border); border-radius:2px; }
+  .progress span.done{ background:var(--amber); }
+
+  .qcount{ font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--text-faint); margin-bottom:14px; text-align:center; }
+
+  .email-card{
+    background:var(--bg-panel); border:1px solid var(--border); border-radius:4px; overflow:hidden; margin-bottom:24px;
+  }
+  .email-card .ec-head{ padding:14px 18px; border-bottom:1px solid var(--border-soft); background:var(--bg-panel-2); font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--text-faint); }
+  .email-card .ec-body{ padding:20px 20px 22px; }
+  .email-card .from{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--text-faint); margin-bottom:10px; }
+  .email-card .from b{ color:var(--text); font-weight:500; }
+  .email-card .subj{ font-size:15.5px; color:var(--text); font-weight:500; margin-bottom:12px; font-family:'Space Grotesk',sans-serif; }
+  .email-card .body{ font-size:14px; color:var(--text-muted); line-height:1.65; }
+  .email-card .fake-link{ color:var(--amber); text-decoration:underline; cursor:default; }
+
+  .choice-row{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:20px; }
+  .choice-btn{
+    font-family:'IBM Plex Mono', monospace; font-size:13.5px; letter-spacing:.02em;
+    padding:14px; border-radius:3px; border:1px solid var(--border); background:var(--bg-panel);
+    color:var(--text); cursor:pointer; text-align:center; transition:all .15s ease;
+  }
+  .choice-btn:hover{ border-color:var(--amber); }
+  .choice-btn:disabled{ cursor:default; }
+  .choice-btn.correct{ border-color:var(--teal); background:rgba(69,184,166,0.1); color:var(--teal); }
+  .choice-btn.wrong{ border-color:#C1553F; background:rgba(193,85,63,0.1); color:#E28C7A; }
+
+  .explain{
+    display:none; background:var(--bg-panel-2); border:1px solid var(--border-soft); border-radius:3px;
+    padding:16px 18px; font-size:13.5px; color:var(--text-muted); margin-bottom:20px;
+  }
+  .explain b{ color:var(--text); font-weight:500; }
+  .explain .verdict{ font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.06em; margin-bottom:8px; display:block; }
+  .explain .verdict.yes{ color:var(--amber); }
+  .explain .verdict.no{ color:var(--teal); }
+
+  .next-btn{ display:none; }
+
+  .result{ display:none; text-align:center; }
+  .result .score{ font-family:'Space Grotesk',sans-serif; font-size:52px; font-weight:700; color:var(--amber); margin-bottom:8px; }
+  .result h2{ font-size:24px; margin-bottom:14px; }
+  .result p{ color:var(--text-muted); font-size:14.5px; max-width:460px; margin:0 auto 30px; }
+
+  @media (max-width: 560px){
+    .choice-row{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="/" class="logo"><svg class="mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M18,12 L50,82 L82,12 L67,12 L50,52 L33,12 Z" fill="#534AB7"/><circle cx="50" cy="50" r="7" fill="none" stroke="#534AB7" stroke-width="2.5"/><line x1="50" y1="50" x2="68" y2="30" stroke="#534AB7" stroke-width="2.5"/><circle cx="68" cy="30" r="3" fill="#534AB7"/></svg>VETARI</a>
+    <div class="navlinks">
+      <a href="/about">About</a>
+      <a href="/solutions">Solutions</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/resources" style="color:var(--text);">Resources</a>
+    </div>
+    <a href="/#waitlist" class="btn btn-primary">Join waitlist</a>
+  </nav>
+</header>
+
+<main>
+  <section class="quiz-hero">
+    <div class="wrap">
+      <div class="eyebrow" style="justify-content:center;">Free tool</div>
+      <h1>Phishing Awareness Quiz</h1>
+      <p>Six realistic email scenarios, based on fictional companies. Decide if each one is phishing or legitimate, then see what gave it away.</p>
+    </div>
+  </section>
+
+  <section class="quiz-wrap">
+    <div class="wrap quiz-shell">
+      <div class="progress" id="progress"></div>
+      <div class="qcount" id="qcount"></div>
+
+      <div id="quizArea"></div>
+
+      <div class="result" id="result">
+        <div class="score" id="scoreNum">0/6</div>
+        <h2 id="resultTitle"></h2>
+        <p id="resultCopy"></p>
+        <a href="/resources" class="btn btn-ghost" style="margin-right:12px;">Back to resources</a>
+        <a href="/#waitlist" class="btn btn-primary">See Trawl</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-left"><svg class="mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M18,12 L50,82 L82,12 L67,12 L50,52 L33,12 Z" fill="#534AB7"/><circle cx="50" cy="50" r="7" fill="none" stroke="#534AB7" stroke-width="2.5"/><line x1="50" y1="50" x2="68" y2="30" stroke="#534AB7" stroke-width="2.5"/><circle cx="68" cy="30" r="3" fill="#534AB7"/></svg><span class="mono" style="font-size:12px;color:var(--text-faint);">VETARI © 2026</span></div>
+    <p>Human Risk · Investigation · Security · Trawl</p>
+  </div>
+</footer>
+
+<script>
+const questions = [
+  {
+    from: "IT Helpdesk <it-support@northline-corp-secure.com>",
+    subj: "Action required: verify your mailbox in the next 2 hours",
+    body: 'We detected unusual sign-in activity on your account. To avoid suspension, verify your identity now: <span class="fake-link">northline-corp-secure.com/verify</span>',
+    isPhish: true,
+    why: "The sender domain (northline-corp-secure.com) isn't the company's real domain — just a lookalike. Combine that with a tight, artificial deadline and a mismatched link, and it's a classic credential-phishing setup."
+  },
+  {
+    from: "Priya Nair <priya.nair@meridianair.com>",
+    subj: "Re: Q3 vendor contract — signature page attached",
+    body: "Hi team, following up on our call last week. I've attached the updated signature page for the vendor contract. Let me know if you have questions before Friday's review.",
+    isPhish: false,
+    why: "The sender's name and domain match, the message references a real prior interaction, there's no urgency or pressure, and it doesn't ask you to click a link or hand over credentials — this reads like ordinary business correspondence."
+  },
+  {
+    from: "Vantage HR Portal <no-reply@vantage-hrportal-update.net>",
+    subj: "Your benefits enrollment will be cancelled today",
+    body: 'Open enrollment closes in a few hours. Confirm your selections immediately to avoid losing coverage: <span class="fake-link">vantage-hrportal-update.net/enroll</span>',
+    isPhish: true,
+    why: "A benefits portal shouldn't live on a domain with 'update' bolted onto the company name. The same-day deadline is designed to short-circuit careful reading — a real HR system rarely creates this kind of panic."
+  },
+  {
+    from: "Marcus Webb <marcus.webb@cobaltcloud.io>",
+    subj: "Storage quota at 90% — heads up",
+    body: "Just a heads up, our shared drive is nearing its storage limit. No action needed from you right now, but let's talk at Monday's standup about archiving old projects.",
+    isPhish: false,
+    why: "No link, no urgency, no request for credentials — just an informational note from a named colleague, referencing a specific, plausible upcoming meeting.",
+  },
+  {
+    from: "CEO <ceo.office@northline-corp.com>",
+    subj: "Quick favor — need this handled discreetly",
+    body: "I'm in back-to-back meetings and can't talk. I need you to purchase gift cards for a client gesture and send me the codes directly. Keep this between us for now.",
+    isPhish: true,
+    why: "This is a classic Business Email Compromise pattern — an urgent, secretive request from someone claiming executive authority, asking for something easy to convert to cash, with instructions to bypass normal process and verification."
+  },
+  {
+    from: "Northline Corp Payroll <payroll@northline-corp.com>",
+    subj: "Your November payslip is available",
+    body: "Your payslip for November is now available in the usual employee portal. As always, log in directly at the portal rather than through email links if you ever have doubts.",
+    isPhish: false,
+    why: "The domain matches the real company, there's no link pushing you anywhere, and it even reinforces good habits by telling you to navigate to the portal directly rather than clicking through email."
+  }
+];
+
+let current = 0;
+let score = 0;
+let answered = false;
+
+const quizArea = document.getElementById('quizArea');
+const progress = document.getElementById('progress');
+const qcount = document.getElementById('qcount');
+const result = document.getElementById('result');
+
+function initProgress(){
+  progress.innerHTML = '';
+  questions.forEach((_, i) => {
+    const s = document.createElement('span');
+    if(i < current) s.classList.add('done');
+    progress.appendChild(s);
+  });
+}
+
+function render(){
+  answered = false;
+  initProgress();
+  qcount.textContent = `SCENARIO ${current + 1} OF ${questions.length}`;
+  const q = questions[current];
+  quizArea.innerHTML = `
+    <div class="email-card">
+      <div class="ec-head">INBOX PREVIEW</div>
+      <div class="ec-body">
+        <div class="from">FROM: <b>${q.from}</b></div>
+        <div class="subj">${q.subj}</div>
+        <div class="body">${q.body}</div>
+      </div>
+    </div>
+    <div class="choice-row">
+      <button class="choice-btn" id="btnPhish">🚩 Phishing</button>
+      <button class="choice-btn" id="btnLegit">✅ Legitimate</button>
+    </div>
+    <div class="explain" id="explain">
+      <span class="verdict" id="verdict"></span>
+      <span id="explainText"></span>
+    </div>
+    <button class="btn btn-primary next-btn" id="nextBtn">${current === questions.length - 1 ? 'See results' : 'Next scenario'} →</button>
+  `;
+  document.getElementById('btnPhish').addEventListener('click', () => choose(true));
+  document.getElementById('btnLegit').addEventListener('click', () => choose(false));
+  document.getElementById('nextBtn').addEventListener('click', next);
+}
+
+function choose(guessPhish){
+  if(answered) return;
+  answered = true;
+  const q = questions[current];
+  const correct = guessPhish === q.isPhish;
+  if(correct) score++;
+
+  const phishBtn = document.getElementById('btnPhish');
+  const legitBtn = document.getElementById('btnLegit');
+  phishBtn.disabled = true;
+  legitBtn.disabled = true;
+
+  const correctBtn = q.isPhish ? phishBtn : legitBtn;
+  const chosenBtn = guessPhish ? phishBtn : legitBtn;
+  correctBtn.classList.add('correct');
+  if(!correct) chosenBtn.classList.add('wrong');
+
+  const explain = document.getElementById('explain');
+  const verdict = document.getElementById('verdict');
+  verdict.textContent = q.isPhish ? 'THIS WAS PHISHING' : 'THIS WAS LEGITIMATE';
+  verdict.className = 'verdict ' + (q.isPhish ? 'yes' : 'no');
+  document.getElementById('explainText').textContent = q.why;
+  explain.style.display = 'block';
+
+  document.getElementById('nextBtn').style.display = 'inline-flex';
+}
+
+function next(){
+  current++;
+  if(current >= questions.length){
+    showResult();
+  } else {
+    render();
+  }
+}
+
+function showResult(){
+  quizArea.style.display = 'none';
+  document.querySelector('.progress').style.display = 'none';
+  qcount.style.display = 'none';
+  result.style.display = 'block';
+  document.getElementById('scoreNum').textContent = `${score}/${questions.length}`;
+  let title, copy;
+  if(score === questions.length){
+    title = "Sharp eye.";
+    copy = "You caught every scenario. That instinct is exactly what Trawl trains across an entire organization — continuously, not just once.";
+  } else if(score >= questions.length - 2){
+    title = "Solid instincts, a couple of misses.";
+    copy = "You caught most of it. The ones that slip through are usually the ones tuned to a specific person or moment — which is why ongoing simulation matters more than a one-time quiz.";
+  } else {
+    title = "This is exactly the gap we help close.";
+    copy = "Most people miss more than they'd expect — that's not a reflection on you, it's why phishing still works. Trawl turns this kind of test into an ongoing, org-wide program.";
+  }
+  document.getElementById('resultTitle').textContent = title;
+  document.getElementById('resultCopy').textContent = copy;
+}
+
+render();
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="bg-network.js"></script>
+
+</body>
+</html>
