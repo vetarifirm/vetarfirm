@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Human Risk — PAAS, SATAAS, HRAAS | Vetari</title>
+<meta name="description" content="Vetari's Human Risk pillar: PAAS (Phishing as a Service), SATAAS (Security Awareness Training as a Service), and HRAAS (Human Risk Assessment as a Service).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="vetari-logo.png">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .pillar-hero{ padding:168px 0 80px; border-bottom:1px solid var(--border-soft); }
+  .pillar-hero h1{ font-size:clamp(32px,4.4vw,52px); line-height:1.08; margin:18px 0 22px; max-width:760px; }
+  .pillar-hero p.lede{ font-size:17px; color:var(--text-muted); max-width:600px; margin-bottom:36px; }
+  .breadcrumb{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--text-faint); margin-bottom:18px; }
+  .breadcrumb a{ color:var(--text-faint); }
+  .breadcrumb a:hover{ color:var(--amber); }
+
+  .service-detail{ padding:100px 0; border-bottom:1px solid var(--border-soft); scroll-margin-top:90px; }
+  .service-detail:nth-child(even){ background: radial-gradient(ellipse 55% 90% at 100% 0%, rgba(214,169,59,0.05), transparent 60%); }
+  .sd-grid{ display:grid; grid-template-columns:0.85fr 1.15fr; gap:64px; align-items:start; }
+  .sd-code{ font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--amber); margin-bottom:14px; letter-spacing:.05em; }
+  .sd-grid h2{ font-size:clamp(24px,2.8vw,32px); margin-bottom:16px; max-width:420px; }
+  .sd-grid p.desc{ color:var(--text-muted); font-size:15px; margin-bottom:22px; max-width:460px; }
+
+  @media (max-width: 860px){ .sd-grid{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="/" class="logo"><svg class="mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M18,12 L50,82 L82,12 L67,12 L50,52 L33,12 Z" fill="#534AB7"/><circle cx="50" cy="50" r="7" fill="none" stroke="#534AB7" stroke-width="2.5"/><line x1="50" y1="50" x2="68" y2="30" stroke="#534AB7" stroke-width="2.5"/><circle cx="68" cy="30" r="3" fill="#534AB7"/></svg>VETARI</a>
+    <div class="navlinks">
+      <a href="/about">About</a>
+      <a href="/solutions" style="color:var(--text);">Solutions</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/resources">Resources</a>
+    </div>
+    <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <a href="/#waitlist" class="btn btn-primary">Join waitlist</a>
+  </nav>
+</header>
+
+<main>
+  <section class="pillar-hero">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="/solutions">Solutions</a> / Human Risk</div>
+      <div class="eyebrow">Pillar 01 — Human Risk</div>
+      <h1>People are the perimeter. <span class="grad">We help you defend it.</span></h1>
+      <p class="lede">Three services, one goal: measurably reduce how often your people fall for manipulation — and prove it with data, not a training certificate on file.</p>
+      <div class="hero-tags">
+        <span>PAAS</span>
+        <span>SATAAS</span>
+        <span>HRAAS</span>
+        <span>Trawl platform</span>
+      </div>
+      <a href="/#waitlist" class="btn btn-ghost">Talk to us about Human Risk</a>
+    </div>
+  </section>
+
+  <section class="service-detail" id="paas">
+    <div class="wrap sd-grid">
+      <div>
+        <div class="sd-code">01 — PAAS</div>
+        <h2>Phishing as a Service</h2>
+        <p class="desc">Ongoing, automated phishing simulation campaigns run through Trawl — tailored to your organization's departments and risk profile. Not a one-time exercise, but continuous, real-world testing.</p>
+        <a href="/#trawl" class="btn btn-ghost">See the Trawl platform</a>
+      </div>
+      <ul class="fg-list">
+        <li><span class="mk">→</span> Realistic, customizable phishing campaigns across email and other channels</li>
+        <li><span class="mk">→</span> Per-employee and org-wide risk scoring over time</li>
+        <li><span class="mk">→</span> Click-rate, report-rate, and trend data as auditable evidence</li>
+        <li><span class="mk">→</span> Delivered as a subscription — no separate tooling to manage</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="service-detail" id="sataas">
+    <div class="wrap sd-grid">
+      <div>
+        <div class="sd-code">02 — SATAAS</div>
+        <h2>Security Awareness Training as a Service</h2>
+        <p class="desc">Recurring, subscription-based staff training — a blend of live instructor-led sessions and Trawl's awareness content — covering phishing recognition, social engineering, and secure data handling.</p>
+        <a href="/#waitlist" class="btn btn-ghost">Bring SATAAS to your org</a>
+      </div>
+      <ul class="fg-list">
+        <li><span class="mk">→</span> Live and self-paced training modules, refreshed on a set cadence</li>
+        <li><span class="mk">→</span> Built around real social engineering tactics, not generic slides</li>
+        <li><span class="mk">→</span> Attendance and completion records for internal audit</li>
+        <li><span class="mk">→</span> Structured to satisfy periodic-training compliance requirements</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="service-detail" id="hraas">
+    <div class="wrap sd-grid">
+      <div>
+        <div class="sd-code">03 — HRAAS</div>
+        <h2>Human Risk Assessment as a Service</h2>
+        <p class="desc">A structured assessment of your organization's human risk posture — baseline phishing susceptibility, department-level risk scoring, and prioritized recommendations to benchmark improvement against over time.</p>
+        <a href="/#waitlist" class="btn btn-ghost">Request a baseline assessment</a>
+      </div>
+      <ul class="fg-list">
+        <li><span class="mk">→</span> Baseline phishing susceptibility testing across your organization</li>
+        <li><span class="mk">→</span> Department-level and role-level risk scoring</li>
+        <li><span class="mk">→</span> Prioritized, actionable recommendations — not just a score</li>
+        <li><span class="mk">→</span> A benchmark to measure PAAS/SATAAS improvement against</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="wrap">
+      <div class="eyebrow" style="justify-content:center;">Not sure where to start?</div>
+      <h2>Start with a baseline. Build from there.</h2>
+      <p>Most engagements begin with HRAAS — a starting point and benchmark — before moving into ongoing PAAS and SATAAS.</p>
+      <a href="/#waitlist" class="btn btn-primary">Join the waitlist</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-left"><svg class="mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M18,12 L50,82 L82,12 L67,12 L50,52 L33,12 Z" fill="#534AB7"/><circle cx="50" cy="50" r="7" fill="none" stroke="#534AB7" stroke-width="2.5"/><line x1="50" y1="50" x2="68" y2="30" stroke="#534AB7" stroke-width="2.5"/><circle cx="68" cy="30" r="3" fill="#534AB7"/></svg><span class="mono" style="font-size:12px;color:var(--text-faint);">VETARI © 2026</span></div>
+    <p>Human Risk · Investigation · Security · Trawl</p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="bg-network.js"></script>
+
+</body>
+</html>

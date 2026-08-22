@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Vetari</title>
+<meta name="description" content="Why Vetari exists, how we work, and the principles behind our OSINT, VAPT, and human risk services.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="vetari-logo.png">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* ---------- About-page specific ---------- */
+  .about-hero{
+    padding:168px 0 90px;
+    border-bottom:1px solid var(--border-soft);
+  }
+  .about-hero h1{
+    font-size:clamp(32px,4.4vw,52px);
+    line-height:1.08;
+    margin:18px 0 22px;
+    max-width:760px;
+  }
+  .about-hero p.lede{
+    font-size:17px;
+    color:var(--text-muted);
+    max-width:600px;
+  }
+
+  .story{
+    padding:100px 0;
+    border-bottom:1px solid var(--border-soft);
+  }
+  .story-grid{
+    display:grid;
+    grid-template-columns:0.85fr 1.15fr;
+    gap:64px;
+  }
+  .story-grid .eyebrow{ margin-bottom:16px; }
+  .story-grid h2{ font-size:clamp(24px,2.8vw,32px); margin-bottom:20px; max-width:340px; }
+  .story-body p{
+    color:var(--text-muted);
+    font-size:15.5px;
+    margin-bottom:18px;
+    max-width:600px;
+  }
+  .story-body p:last-child{ margin-bottom:0; }
+  .story-body strong{ color:var(--text); font-weight:500; }
+
+  .pull{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:22px;
+    line-height:1.4;
+    color:var(--text);
+    border-left:2px solid var(--amber);
+    padding-left:20px;
+    margin:28px 0;
+    max-width:520px;
+  }
+
+  .values{ padding:100px 0; border-bottom:1px solid var(--border-soft); }
+  .value-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--border-soft);
+    border:1px solid var(--border-soft);
+    margin-top:56px;
+  }
+  .value-card{
+    background:var(--bg);
+    padding:30px 26px;
+    min-height:190px;
+  }
+  .value-card .vc-id{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px; color:var(--amber);
+    margin-bottom:16px;
+  }
+  .value-card h3{ font-size:17px; margin-bottom:10px; }
+  .value-card p{ color:var(--text-muted); font-size:14px; }
+
+  .practice{
+    padding:100px 0;
+    border-bottom:1px solid var(--border-soft);
+    background: radial-gradient(ellipse 60% 100% at 0% 0%, rgba(214,169,59,0.06), transparent 60%);
+  }
+  .practice-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:64px;
+    align-items:center;
+  }
+  .practice h2{ font-size:clamp(24px,2.8vw,32px); margin:16px 0 18px; }
+  .practice p.lede{ color:var(--text-muted); font-size:15px; margin-bottom:0; max-width:480px; }
+
+  .practice-panel{
+    background:var(--bg-panel);
+    border:1px solid var(--border);
+    border-radius:4px;
+    padding:24px;
+  }
+  .practice-list{ list-style:none; }
+  .practice-list li{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:14px 0;
+    border-top:1px solid var(--border-soft);
+    font-size:14px;
+  }
+  .practice-list li:first-child{ border-top:none; }
+  .practice-list li span:first-child{ color:var(--text-muted); }
+  .practice-list li span:last-child{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--teal);
+    border:1px solid rgba(69,184,166,0.35);
+    padding:3px 8px;
+    border-radius:2px;
+  }
+
+  .cta-band{
+    padding:100px 0;
+    text-align:center;
+  }
+  .cta-band h2{ font-size:clamp(26px,3.6vw,38px); margin:16px 0 14px; }
+  .cta-band p{ color:var(--text-muted); font-size:15px; margin-bottom:30px; max-width:520px; margin-left:auto; margin-right:auto; }
+
+  @media (max-width: 860px){
+    .story-grid{ grid-template-columns:1fr; }
+    .value-grid{ grid-template-columns:1fr 1fr; }
+    .practice-grid{ grid-template-columns:1fr; }
+  }
+  @media (max-width: 520px){
+    .value-grid{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="/" class="logo"><svg class="mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M18,12 L50,82 L82,12 L67,12 L50,52 L33,12 Z" fill="#534AB7"/><circle cx="50" cy="50" r="7" fill="none" stroke="#534AB7" stroke-width="2.5"/><line x1="50" y1="50" x2="68" y2="30" stroke="#534AB7" stroke-width="2.5"/><circle cx="68" cy="30" r="3" fill="#534AB7"/></svg>VETARI</a>
+    <div class="navlinks">
+      <a href="/about" style="color:var(--text);">About</a>
+      <a href="/solutions">Solutions</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/resources">Resources</a>
+    </div>
+    <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <a href="/#waitlist" class="btn btn-primary">Join waitlist</a>
+  </nav>
+</header>
+
+<main>
+  <section class="about-hero">
+    <div class="wrap">
+      <div class="eyebrow">About Vetari</div>
+      <h1>Most security failures aren't technical. They're the <span class="grad">gap between what a team assumes and what's actually true.</span></h1>
+      <p class="lede">Vetari exists to close that gap — testing systems and people the way someone trying to get in actually would, then handing back findings your team can act on.</p>
+    </div>
+  </section>
+
+  <section class="story">
+    <div class="wrap story-grid">
+      <div>
+        <div class="eyebrow">Why we started</div>
+        <h2>Built by people who've sat on both sides of a breach report.</h2>
+      </div>
+      <div class="story-body">
+        <p>Most security work gets split into silos: a pentest team that never talks to the awareness-training team, a due-diligence checklist that never touches what OSINT would actually surface, an annual training video nobody remembers by March. Attackers don't respect those silos — they just look for whichever one was left open.</p>
+        <p class="pull">Vetari was built on one idea: your exposure isn't just your code or your firewall. It's your people, your public footprint, and everyone you do business with.</p>
+        <p>So instead of offering one narrow service, we built a practice that moves across all of it — <strong>reconnaissance, technical testing, human behavior, and ongoing training</strong> — as one continuous view of risk, not four separate vendors sending four separate reports.</p>
+        <p>That same thinking led us to build <strong>Trawl</strong>, our phishing simulation and awareness platform — because the training that actually changes behavior has to be continuous, measured, and tied to what real attackers are doing right now, not a slide deck people click through once a year.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="values">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>What we hold ourselves to.</h2>
+        <p>These shape how every engagement runs, regardless of scope.</p>
+      </div>
+      <div class="value-grid">
+        <div class="value-card">
+          <div class="vc-id">01</div>
+          <h3>Evidence over assumption</h3>
+          <p>We test claims instead of taking them at face value — for your organization's security posture and our own findings.</p>
+        </div>
+        <div class="value-card">
+          <div class="vc-id">02</div>
+          <h3>People are part of the system</h3>
+          <p>A network is only as secure as the humans operating it. We assess and train for that, not just for infrastructure.</p>
+        </div>
+        <div class="value-card">
+          <div class="vc-id">03</div>
+          <h3>Reports you can act on</h3>
+          <p>Findings are prioritized by real-world risk and written for the people who have to fix them — not just to fill pages.</p>
+        </div>
+        <div class="value-card">
+          <div class="vc-id">04</div>
+          <h3>Continuous, not once-a-year</h3>
+          <p>Risk doesn't stay still after a single test. Our engagements and Trawl are built for ongoing visibility.</p>
+        </div>
+        <div class="value-card">
+          <div class="vc-id">05</div>
+          <h3>Discretion by default</h3>
+          <p>Investigations, due diligence, and social engineering work require handling sensitive information carefully. We treat it that way.</p>
+        </div>
+        <div class="value-card">
+          <div class="vc-id">06</div>
+          <h3>Scoped, authorized, documented</h3>
+          <p>Every test and simulation runs against a clear, signed scope of engagement — no surprises for you or your team.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="practice">
+    <div class="wrap practice-grid">
+      <div>
+        <div class="eyebrow">How we operate</div>
+        <h2>One team, one methodology, across every service.</h2>
+        <p class="lede">Whether you bring us in for a single OSINT sweep or a full managed awareness program, engagements move through the same five phases — Recon, Assess, Simulate, Train, Monitor — so nothing falls through the cracks between services.</p>
+      </div>
+      <div class="practice-panel">
+        <ul class="practice-list">
+          <li><span>Engagement scoping &amp; authorization</span><span>SIGNED</span></li>
+          <li><span>Reconnaissance &amp; assessment</span><span>ACTIVE</span></li>
+          <li><span>Simulation / testing window</span><span>SCHEDULED</span></li>
+          <li><span>Findings &amp; report delivery</span><span>TRACKED</span></li>
+          <li><span>Training &amp; remediation support</span><span>ONGOING</span></li>
+          <li><span>Continuous monitoring (optional)</span><span>OPT-IN</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="wrap">
+      <div class="eyebrow" style="justify-content:center;">Get involved early</div>
+      <h2>We're opening access to a small group first.</h2>
+      <p>Join the waitlist to hear when PAAS, SATAAS, HRAAS, Investigation, and Security services open up for early partners.</p>
+      <a href="/#waitlist" class="btn btn-primary">Join the waitlist</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-left"><svg class="mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M18,12 L50,82 L82,12 L67,12 L50,52 L33,12 Z" fill="#534AB7"/><circle cx="50" cy="50" r="7" fill="none" stroke="#534AB7" stroke-width="2.5"/><line x1="50" y1="50" x2="68" y2="30" stroke="#534AB7" stroke-width="2.5"/><circle cx="68" cy="30" r="3" fill="#534AB7"/></svg><span class="mono" style="font-size:12px;color:var(--text-faint);">VETARI © 2026</span></div>
+    <p>Human Risk · Investigation · Security · Trawl</p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="bg-network.js"></script>
+
+</body>
+</html>

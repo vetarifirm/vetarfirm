@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solutions — Vetari</title>
+<meta name="description" content="Vetari solutions by team: security &amp; IT, developers, HR &amp; people, and legal &amp; deal teams.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="vetari-logo.png">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* ---------- Solutions-page specific ---------- */
+  .sol-hero{
+    padding:168px 0 80px;
+    border-bottom:1px solid var(--border-soft);
+  }
+  .sol-hero h1{
+    font-size:clamp(32px,4.4vw,52px);
+    line-height:1.08;
+    margin:18px 0 22px;
+    max-width:760px;
+  }
+  .sol-hero p.lede{
+    font-size:17px;
+    color:var(--text-muted);
+    max-width:600px;
+    margin-bottom:36px;
+  }
+
+  /* quick nav "I need to..." */
+  .quicknav{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+    background:var(--border-soft);
+    border:1px solid var(--border-soft);
+  }
+  .qn-item{
+    background:var(--bg-panel);
+    padding:18px 18px;
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    transition:background .15s ease;
+  }
+  .qn-item:hover{ background:var(--bg-panel-2); }
+  .qn-item span.txt{
+    font-size:13.5px;
+    color:var(--text);
+  }
+  .qn-item span.arrow{
+    color:var(--amber);
+    font-family:'IBM Plex Mono', monospace;
+    flex:none;
+  }
+
+  /* audience segment blocks */
+  .segment{
+    padding:100px 0;
+    border-bottom:1px solid var(--border-soft);
+    scroll-margin-top:90px;
+  }
+  .segment:nth-child(even){
+    background: radial-gradient(ellipse 55% 90% at 100% 0%, rgba(214,169,59,0.05), transparent 60%);
+  }
+  .segment-grid{
+    display:grid;
+    grid-template-columns:0.8fr 1.2fr;
+    gap:64px;
+    align-items:start;
+  }
+  .segment-grid.reverse{
+    grid-template-columns:1.2fr 0.8fr;
+  }
+  .segment-grid.reverse .seg-copy{ order:2; }
+  .segment-grid.reverse .seg-services{ order:1; }
+
+  .seg-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--text-faint);
+    margin-bottom:14px;
+  }
+  .segment h2{ font-size:clamp(24px,2.8vw,32px); margin-bottom:16px; max-width:420px; }
+  .segment p.problem{
+    color:var(--text-muted);
+    font-size:15px;
+    margin-bottom:22px;
+    max-width:440px;
+  }
+  .seg-copy .btn{ margin-top:6px; }
+
+  .seg-services{
+    display:flex;
+    flex-direction:column;
+    gap:1px;
+    background:var(--border-soft);
+    border:1px solid var(--border-soft);
+  }
+  .seg-service{
+    background:var(--bg);
+    padding:20px 22px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:16px;
+  }
+  .seg-service .ss-name{ font-size:14.5px; color:var(--text); }
+  .seg-service .ss-desc{ font-size:12.5px; color:var(--text-faint); margin-top:4px; }
+  .seg-service .ss-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    color:var(--teal);
+    border:1px solid rgba(69,184,166,0.35);
+    padding:3px 8px;
+    border-radius:2px;
+    flex:none;
+    white-space:nowrap;
+  }
+
+  .cta-band{
+    padding:100px 0;
+    text-align:center;
+  }
+  .cta-band h2{ font-size:clamp(26px,3.6vw,38px); margin:16px 0 14px; }
+  .cta-band p{ color:var(--text-muted); font-size:15px; margin-bottom:30px; max-width:520px; margin-left:auto; margin-right:auto; }
+
+  @media (max-width: 860px){
+    .quicknav{ grid-template-columns:1fr 1fr; }
+    .segment-grid, .segment-grid.reverse{ grid-template-columns:1fr; }
+    .segment-grid.reverse .seg-copy{ order:1; }
+    .segment-grid.reverse .seg-services{ order:2; }
+  }
+  @media (max-width: 520px){
+    .quicknav{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="/" class="logo"><svg class="mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M18,12 L50,82 L82,12 L67,12 L50,52 L33,12 Z" fill="#534AB7"/><circle cx="50" cy="50" r="7" fill="none" stroke="#534AB7" stroke-width="2.5"/><line x1="50" y1="50" x2="68" y2="30" stroke="#534AB7" stroke-width="2.5"/><circle cx="68" cy="30" r="3" fill="#534AB7"/></svg>VETARI</a>
+    <div class="navlinks">
+      <a href="/about">About</a>
+      <a href="/solutions" style="color:var(--text);">Solutions</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/resources">Resources</a>
+    </div>
+    <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <a href="/#waitlist" class="btn btn-primary">Join waitlist</a>
+  </nav>
+</header>
+
+<main>
+  <section class="sol-hero">
+    <div class="wrap">
+      <div class="eyebrow">Solutions</div>
+      <h1>Three services. <span class="grad">One built for each pillar.</span></h1>
+      <p class="lede">Vetari's services apply differently depending on what you're trying to protect — your people, your decisions, or your infrastructure. Explore each pillar in depth, or find your team below.</p>
+    </div>
+  </section>
+
+  <section class="pillars" style="padding-top:0; padding-bottom:100px;">
+    <div class="wrap">
+      <div class="pillar-grid">
+        <a href="/human-risk" class="pillar" data-accent="amber" style="text-decoration:none; display:flex;">
+          <div style="display:flex; flex-direction:column; width:100%;">
+            <div class="pillar-id">PILLAR 01 — HUMAN RISK</div>
+            <h3>People are the perimeter.</h3>
+            <p class="pdesc">PAAS, SATAAS, and HRAAS — phishing simulation, awareness training, and risk assessment, delivered as subscribable services.</p>
+            <ul class="pillar-list">
+              <li><span class="plabel">PAAS — Phishing as a Service</span><span class="product-tag">TRAWL</span></li>
+              <li><span class="plabel">SATAAS — Awareness Training as a Service</span></li>
+              <li><span class="plabel">HRAAS — Human Risk Assessment</span></li>
+            </ul>
+            <div class="mono" style="margin-top:20px; font-size:12.5px; color:var(--amber);">Explore Human Risk →</div>
+          </div>
+        </a>
+        <a href="/investigation" class="pillar" data-accent="teal" style="text-decoration:none; display:flex;">
+          <div style="display:flex; flex-direction:column; width:100%;">
+            <div class="pillar-id">PILLAR 02 — INVESTIGATION</div>
+            <h3>Verify before you decide.</h3>
+            <p class="pdesc">OSINT, due diligence, and brand intelligence — evidence in place of assumption, for deals, hires, and partners.</p>
+            <ul class="pillar-list">
+              <li><span class="plabel">OSINT &amp; investigations</span></li>
+              <li><span class="plabel">Due diligence</span></li>
+              <li><span class="plabel">Brand &amp; threat intelligence</span></li>
+            </ul>
+            <div class="mono" style="margin-top:20px; font-size:12.5px; color:var(--teal);">Explore Investigation →</div>
+          </div>
+        </a>
+        <a href="/security" class="pillar" data-accent="indigo" style="text-decoration:none; display:flex;">
+          <div style="display:flex; flex-direction:column; width:100%;">
+            <div class="pillar-id">PILLAR 03 — SECURITY</div>
+            <h3>Find it before they do.</h3>
+            <p class="pdesc">Hands-on testing of networks, applications, and infrastructure — reports written to be triaged and fixed.</p>
+            <ul class="pillar-list">
+              <li><span class="plabel">Vulnerability Assessment &amp; Pentesting</span></li>
+              <li><span class="plabel">Security assessments</span></li>
+              <li><span class="plabel">Ethical hacking engagements</span></li>
+            </ul>
+            <div class="mono" style="margin-top:20px; font-size:12.5px; color:#8B7FE8;">Explore Security →</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sol-hero" style="padding:60px 0 40px; border-top:1px solid var(--border-soft);">
+    <div class="wrap">
+      <div class="eyebrow">Or, browse by team</div>
+      <div class="quicknav" style="margin-top:20px;">
+        <a class="qn-item" href="#security"><span class="txt">Test my app or network</span><span class="arrow">→</span></a>
+        <a class="qn-item" href="#legal"><span class="txt">Vet a vendor or hire</span><span class="arrow">→</span></a>
+        <a class="qn-item" href="#hr"><span class="txt">Train my team on phishing</span><span class="arrow">→</span></a>
+        <a class="qn-item" href="#developers"><span class="txt">Test my code before release</span><span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="segment" id="security">
+    <div class="wrap segment-grid">
+      <div class="seg-copy">
+        <div class="seg-tag">FOR — SECURITY &amp; IT TEAMS</div>
+        <h2>Find the gaps before an attacker does.</h2>
+        <p class="problem">You're accountable for infrastructure you can't always see the edges of — shadow IT, exposed assets, and a growing attack surface. You need testing that mirrors how real attackers actually operate, not a checklist scan.</p>
+        <a href="/#waitlist" class="btn btn-ghost">Talk to us about your environment</a>
+      </div>
+      <div class="seg-services">
+        <div class="seg-service">
+          <div><div class="ss-name">OSINT &amp; Investigations</div><div class="ss-desc">Map your public-facing digital footprint and exposure</div></div>
+          <span class="ss-tag">INVESTIGATION</span>
+        </div>
+        <div class="seg-service">
+          <div><div class="ss-name">Vulnerability Assessment &amp; Penetration Testing</div><div class="ss-desc">Hands-on testing of networks and infrastructure</div></div>
+          <span class="ss-tag">SECURITY</span>
+        </div>
+        <div class="seg-service">
+          <div><div class="ss-name">HRAAS — Human Risk Assessment</div><div class="ss-desc">Understand where your people are the weakest link</div></div>
+          <span class="ss-tag">HRAAS</span>
+        </div>
+        <div class="seg-service">
+          <div><div class="ss-name">SATAAS — Awareness Training</div><div class="ss-desc">Ongoing program so it's never a once-a-year task</div></div>
+          <span class="ss-tag">SATAAS</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="segment" id="developers">
+    <div class="wrap segment-grid reverse">
+      <div class="seg-services">
+        <div class="seg-service">
+          <div><div class="ss-name">Application &amp; API Penetration Testing</div><div class="ss-desc">Testing scoped to your codebase, before or after release</div></div>
+          <span class="ss-tag">SECURITY</span>
+        </div>
+        <div class="seg-service">
+          <div><div class="ss-name">Infrastructure &amp; Cloud Testing</div><div class="ss-desc">CI/CD pipelines, cloud config, and exposed services</div></div>
+          <span class="ss-tag">SECURITY</span>
+        </div>
+        <div class="seg-service">
+          <div><div class="ss-name">Actionable Findings</div><div class="ss-desc">Reports written to be triaged and fixed, not just read</div></div>
+          <span class="ss-tag">✓</span>
+        </div>
+      </div>
+      <div class="seg-copy">
+        <div class="seg-tag">FOR — DEVELOPERS &amp; ENGINEERING TEAMS</div>
+        <h2>Testing that fits into how you actually ship.</h2>
+        <p class="problem">Generic pentest reports full of low-priority noise don't help anyone. We scope engagements to your stack, prioritize by real exploitability, and hand back findings your team can act on without a translation layer.</p>
+        <a href="/security" class="btn btn-ghost">See the Security pillar</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="segment" id="hr">
+    <div class="wrap segment-grid">
+      <div class="seg-copy">
+        <div class="seg-tag">FOR — HR &amp; PEOPLE TEAMS</div>
+        <h2>Build a security culture people actually remember.</h2>
+        <p class="problem">Annual training videos don't change behavior. You need something that reflects how real social engineering happens, measures who's at risk, and turns that into training people engage with.</p>
+        <a href="/human-risk" class="btn btn-ghost">See the Human Risk pillar</a>
+      </div>
+      <div class="seg-services">
+        <div class="seg-service">
+          <div><div class="ss-name">SATAAS — Awareness Training as a Service</div><div class="ss-desc">Phishing, pretexting, and physical/phone-based exercises</div></div>
+          <span class="ss-tag">SATAAS</span>
+        </div>
+        <div class="seg-service">
+          <div><div class="ss-name">PAAS — Phishing as a Service</div><div class="ss-desc">Ongoing phishing simulation + automated training, on subscription</div></div>
+          <span class="ss-tag">TRAWL</span>
+        </div>
+        <div class="seg-service">
+          <div><div class="ss-name">HRAAS — Human Risk Assessment</div><div class="ss-desc">Baseline how susceptible your teams are today</div></div>
+          <span class="ss-tag">HRAAS</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="segment" id="legal">
+    <div class="wrap segment-grid reverse">
+      <div class="seg-services">
+        <div class="seg-service">
+          <div><div class="ss-name">Due Diligence</div><div class="ss-desc">Vendor, acquisition, and partner background checks</div></div>
+          <span class="ss-tag">INVESTIGATION</span>
+        </div>
+        <div class="seg-service">
+          <div><div class="ss-name">OSINT &amp; Investigations</div><div class="ss-desc">Verify claims and surface public risk signals on a subject</div></div>
+          <span class="ss-tag">INVESTIGATION</span>
+        </div>
+        <div class="seg-service">
+          <div><div class="ss-name">Documented, defensible reporting</div><div class="ss-desc">Findings delivered in a form that supports your decision trail</div></div>
+          <span class="ss-tag">✓</span>
+        </div>
+      </div>
+      <div class="seg-copy">
+        <div class="seg-tag">FOR — LEGAL, COMPLIANCE &amp; DEAL TEAMS</div>
+        <h2>Decisions backed by verified information.</h2>
+        <p class="problem">Whether you're closing a deal, onboarding a vendor, or making a senior hire, assumptions are expensive. We verify what's claimed against what's actually discoverable, and document it clearly.</p>
+        <a href="/investigation" class="btn btn-ghost">See the Investigation pillar</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="wrap">
+      <div class="eyebrow" style="justify-content:center;">Not sure which fits?</div>
+      <h2>Tell us what you're trying to protect.</h2>
+      <p>Join the waitlist and mention your use case — we'll point you to the right service when access opens.</p>
+      <a href="/#waitlist" class="btn btn-primary">Join the waitlist</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-left"><svg class="mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M18,12 L50,82 L82,12 L67,12 L50,52 L33,12 Z" fill="#534AB7"/><circle cx="50" cy="50" r="7" fill="none" stroke="#534AB7" stroke-width="2.5"/><line x1="50" y1="50" x2="68" y2="30" stroke="#534AB7" stroke-width="2.5"/><circle cx="68" cy="30" r="3" fill="#534AB7"/></svg><span class="mono" style="font-size:12px;color:var(--text-faint);">VETARI © 2026</span></div>
+    <p>Human Risk · Investigation · Security · Trawl</p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="bg-network.js"></script>
+
+</body>
+</html>

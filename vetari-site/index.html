@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vetari — Security Testing, Investigations &amp; Human Risk</title>
+<meta name="description" content="OSINT, investigations, due diligence, VAPT, human risk assessment and security awareness training — plus Trawl, our phishing simulation platform.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="vetari-logo.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="logo"><svg class="mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M18,12 L50,82 L82,12 L67,12 L50,52 L33,12 Z" fill="#534AB7"/><circle cx="50" cy="50" r="7" fill="none" stroke="#534AB7" stroke-width="2.5"/><line x1="50" y1="50" x2="68" y2="30" stroke="#534AB7" stroke-width="2.5"/><circle cx="68" cy="30" r="3" fill="#534AB7"/></svg>VETARI</div>
+    <div class="navlinks">
+      <a href="/about">About</a>
+      <a href="/solutions">Solutions</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/resources">Resources</a>
+    </div>
+    <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <a href="#waitlist" class="btn btn-primary">Join waitlist</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">Now onboarding early access partners</div>
+        <h1>Know your exposure <span class="grad">before someone else finds it first.</span></h1>
+        <p class="lede">Vetari runs the offense so your organization doesn't have to learn the hard way — OSINT and investigations, due diligence, penetration testing, and the human-risk side most vendors skip.</p>
+        <div class="hero-tags">
+          <span>Human Risk</span>
+          <span>Investigation</span>
+          <span>Security</span>
+          <span>Trawl</span>
+        </div>
+        <a href="#waitlist" class="btn btn-primary">Request early access</a>
+      </div>
+
+      <div class="dossier">
+        <div class="dossier-head">
+          <span class="tag">CASE FILE // FP-2607-A</span>
+          <div class="dots"><span></span><span></span><span></span></div>
+        </div>
+        <div class="dossier-body" id="dossier-lines"></div>
+        <div class="dossier-foot">
+          <span>SOURCE: vetari/recon</span>
+          <span>STATUS: <span style="color:var(--amber)">LIVE</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="audience">
+    <div class="wrap">
+      <span><b>Built for</b> Security &amp; IT leaders</span>
+      <span>Development teams</span>
+      <span>Legal &amp; compliance</span>
+      <span>HR &amp; People teams</span>
+      <span>Founders running due diligence</span>
+    </div>
+  </section>
+
+  <section class="pillars" id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Three pillars. One security posture.</h2>
+        <p>Human Risk, Investigation, and Security — each stands alone, or runs together as a continuous program.</p>
+      </div>
+
+      <div class="pillar-grid">
+        <div class="pillar" data-accent="amber">
+          <div class="pillar-id">PILLAR 01 — HUMAN RISK</div>
+          <h3>People are the perimeter.</h3>
+          <p class="pdesc">We assess how susceptible your teams are to manipulation, then close the gap with simulation and training that actually changes behavior — delivered as productized, subscribable services.</p>
+          <ul class="pillar-list">
+            <li><span class="plabel"><b>PAAS</b> — Phishing as a Service</span><span class="product-tag">TRAWL</span></li>
+            <li><span class="plabel"><b>SATAAS</b> — Security Awareness Training as a Service</span></li>
+            <li><span class="plabel"><b>HRAAS</b> — Human Risk Assessment as a Service</span></li>
+          </ul>
+        </div>
+        <div class="pillar" data-accent="teal">
+          <div class="pillar-id">PILLAR 02 — INVESTIGATION</div>
+          <h3>Verify before you decide.</h3>
+          <p class="pdesc">We map what's publicly discoverable about an organization, person, or subject — so decisions on deals, hires, and partners rest on evidence, not assumption.</p>
+          <ul class="pillar-list">
+            <li><span class="plabel">OSINT &amp; investigations</span></li>
+            <li><span class="plabel">Due diligence</span></li>
+            <li><span class="plabel">Brand &amp; threat intelligence</span></li>
+          </ul>
+        </div>
+        <div class="pillar" data-accent="indigo">
+          <div class="pillar-id">PILLAR 03 — SECURITY</div>
+          <h3>Find it before they do.</h3>
+          <p class="pdesc">Hands-on testing of networks, applications, and infrastructure — reports written to be triaged and fixed, not just read.</p>
+          <ul class="pillar-list">
+            <li><span class="plabel">Vulnerability Assessment &amp; Pentesting</span></li>
+            <li><span class="plabel">Security assessments</span></li>
+            <li><span class="plabel">Ethical hacking engagements</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="fg" id="trawl">
+    <div class="wrap fg-grid">
+      <div>
+        <div class="eyebrow">Our platform</div>
+        <h2>Trawl: phishing simulation &amp; awareness training, on subscription.</h2>
+        <p class="lede">Built in-house and ready for your organization. Trawl runs realistic phishing campaigns, measures who clicks, and delivers the training that closes the gap — continuously, not once a year.</p>
+        <ul class="fg-list">
+          <li><span class="mk">→</span> Realistic, customizable phishing campaigns across email and other channels</li>
+          <li><span class="mk">→</span> Per-employee and org-wide risk scoring over time</li>
+          <li><span class="mk">→</span> Automated, targeted training triggered by simulation results</li>
+          <li><span class="mk">→</span> Reporting built for both security teams and leadership</li>
+          <li><span class="mk">→</span> Delivered as a subscription — no separate tooling to manage</li>
+        </ul>
+        <a href="#waitlist" class="btn btn-ghost">Get Trawl early access</a>
+      </div>
+
+      <div class="fg-panel">
+        <div class="top">
+          <span class="mono" style="font-size:11px;color:var(--text-faint);">SIMULATED CAMPAIGN PREVIEW</span>
+          <span class="badge">TRAWL</span>
+        </div>
+        <div class="fg-mail">
+          <div class="from">FROM: it-support@your-org-security.com</div>
+          <div class="subj">Action required: password expiring in 24 hours</div>
+          <div class="body">Your account password is set to expire tomorrow. Click below to keep your access active without interruption...</div>
+          <span class="tag-risk">SIMULATED PHISH — CLICK LOGGED</span>
+        </div>
+        <div class="fg-stats">
+          <div><div class="num" style="color:var(--amber)">1 of 5</div><div class="lbl">EMPLOYEES CLICKED</div></div>
+          <div><div class="num" style="color:var(--teal)">4 of 5</div><div class="lbl">REPORTED CORRECTLY</div></div>
+          <div><div class="num">2 min</div><div class="lbl">TIME TO FIRST CLICK</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="approach" id="approach">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>One path, five phases.</h2>
+        <p>Whichever service you start with, the work moves the same way.</p>
+      </div>
+      <div class="path-line">
+        <div class="phases">
+          <div class="phase">
+            <div class="dot"></div>
+            <div class="ph-id">PHASE 01</div>
+            <h4>Recon</h4>
+            <p>We gather what's discoverable — public, technical, and human.</p>
+          </div>
+          <div class="phase">
+            <div class="dot"></div>
+            <div class="ph-id">PHASE 02</div>
+            <h4>Assess</h4>
+            <p>Findings are tested and ranked by real-world exploitability.</p>
+          </div>
+          <div class="phase">
+            <div class="dot"></div>
+            <div class="ph-id">PHASE 03</div>
+            <h4>Simulate</h4>
+            <p>Controlled exercises show how systems and people actually respond.</p>
+          </div>
+          <div class="phase">
+            <div class="dot"></div>
+            <div class="ph-id">PHASE 04</div>
+            <h4>Train</h4>
+            <p>Results become targeted training, not generic slides.</p>
+          </div>
+          <div class="phase">
+            <div class="dot"></div>
+            <div class="ph-id">PHASE 05</div>
+            <h4>Monitor</h4>
+            <p>We track posture over time so risk doesn't quietly creep back.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="waitlist" id="waitlist">
+    <div class="wrap">
+      <div class="eyebrow" style="justify-content:center;">Early access</div>
+      <h2>Be first through the door.</h2>
+      <p class="lede">Join the waitlist and we'll reach out as we open up PAAS, SATAAS, HRAAS, Investigation, Security, and Trawl access to early partners.</p>
+
+      <form class="waitlist-form" id="waitlistForm">
+        <div class="form-row">
+          <div class="field">
+            <label for="name">Full name</label>
+            <input type="text" id="name" name="name" required placeholder="Jane Doe">
+          </div>
+          <div class="field">
+            <label for="email">Work email</label>
+            <input type="email" id="email" name="email" required placeholder="jane@company.com">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="organization">Organization</label>
+            <input type="text" id="organization" name="organization" placeholder="Optional">
+          </div>
+          <div class="field">
+            <label for="interest">Most interested in</label>
+            <select id="interest" name="interest" required>
+              <option value="" disabled selected>Select one</option>
+              <option>PAAS — Phishing as a Service</option>
+              <option>SATAAS — Security Awareness Training as a Service</option>
+              <option>HRAAS — Human Risk Assessment as a Service</option>
+              <option>Investigation (OSINT, due diligence)</option>
+              <option>Security (VAPT, security assessments)</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Join the waitlist</button>
+        <div class="form-note">No spam — just a note when your service or Trawl access opens up.</div>
+        <div id="wl-error"></div>
+      </form>
+
+      <div id="wl-success">
+        <div class="mono">REQUEST LOGGED</div>
+        <h3>You're on the list.</h3>
+        <p>We'll email you as soon as early access opens.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-left"><svg class="mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M18,12 L50,82 L82,12 L67,12 L50,52 L33,12 Z" fill="#534AB7"/><circle cx="50" cy="50" r="7" fill="none" stroke="#534AB7" stroke-width="2.5"/><line x1="50" y1="50" x2="68" y2="30" stroke="#534AB7" stroke-width="2.5"/><circle cx="68" cy="30" r="3" fill="#534AB7"/></svg><span class="mono" style="font-size:12px;color:var(--text-faint);">VETARI © 2026</span></div>
+    <p>Human Risk · Investigation · Security · Trawl</p>
+  </div>
+</footer>
+
+<script>
+  // Animated dossier readout in hero
+  const lines = [
+    {i:'01', v:'initiating reconnaissance sweep...'},
+    {i:'02', v:'assets discovered:', extra:' 14 external-facing', ok:true},
+    {i:'03', v:'exposed credential set found:', extra:' [REDACTED]', redact:true},
+    {i:'04', v:'phishing susceptibility (sample):', extra:' 1 of 5 clicked', flag:true},
+    {i:'05', v:'risk classification:', extra:' ELEVATED', flag:true},
+    {i:'06', v:'recommended path:', extra:' vetari/secure', ok:true},
+  ];
+  const container = document.getElementById('dossier-lines');
+  lines.forEach((l, idx) => {
+    const div = document.createElement('div');
+    div.className = 'ln';
+    div.style.animationDelay = (idx * 0.45 + 0.2) + 's';
+    let extraHtml = '';
+    if(l.extra){
+      if(l.redact){
+        extraHtml = `<span class="redact">${l.extra}</span>`;
+      } else if(l.flag){
+        extraHtml = `<span class="flag">${l.extra}</span>`;
+      } else if(l.ok){
+        extraHtml = `<span class="ok">${l.extra}</span>`;
+      } else {
+        extraHtml = `<span class="val">${l.extra}</span>`;
+      }
+    }
+    div.innerHTML = `<span class="idx">${l.i}</span><span class="val">${l.v}${extraHtml}</span>`;
+    container.appendChild(div);
+  });
+  const cursorLine = document.createElement('div');
+  cursorLine.className = 'ln';
+  cursorLine.style.animationDelay = (lines.length * 0.45 + 0.4) + 's';
+  cursorLine.innerHTML = `<span class="idx">&gt;</span><span class="cursor"></span>`;
+  container.appendChild(cursorLine);
+
+  // Waitlist form submission
+  // NOTE: replace YOUR_FORM_ID below with a real Formspree (or similar) form ID before going live.
+  const FORM_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+
+  const form = document.getElementById('waitlistForm');
+  const successEl = document.getElementById('wl-success');
+  const errorEl = document.getElementById('wl-error');
+
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    errorEl.style.display = 'none';
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Submitting...';
+    submitBtn.disabled = true;
+
+    const data = {
+      name: form.name.value,
+      email: form.email.value,
+      organization: form.organization.value,
+      interest: form.interest.value
+    };
+
+    try{
+      const res = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      if(!res.ok) throw new Error('Submission failed');
+      form.style.display = 'none';
+      successEl.style.display = 'block';
+    } catch(err){
+      errorEl.style.display = 'block';
+      errorEl.textContent = 'Form isn\'t connected yet — email us directly at hello@vetari.com and we\'ll add you to the list.';
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
+    }
+  });
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="bg-network.js"></script>
+
+</body>
+</html>

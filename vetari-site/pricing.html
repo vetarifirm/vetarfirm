@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing — Vetari</title>
+<meta name="description" content="How Vetari pricing works: scoped quotes for security services, and subscription tiers for Trawl.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="vetari-logo.png">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* ---------- Pricing-page specific ---------- */
+  .pr-hero{
+    padding:168px 0 80px;
+    border-bottom:1px solid var(--border-soft);
+  }
+  .pr-hero h1{
+    font-size:clamp(32px,4.4vw,52px);
+    line-height:1.08;
+    margin:18px 0 22px;
+    max-width:720px;
+  }
+  .pr-hero p.lede{
+    font-size:17px;
+    color:var(--text-muted);
+    max-width:580px;
+  }
+
+  /* services pricing */
+  .svc-pricing{ padding:100px 0; border-bottom:1px solid var(--border-soft); }
+  .svc-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--border-soft);
+    border:1px solid var(--border-soft);
+    margin-top:56px;
+  }
+  .svc-card{
+    background:var(--bg);
+    padding:30px 26px;
+    display:flex; flex-direction:column;
+    min-height:230px;
+  }
+  .svc-card .sc-id{ font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--amber); margin-bottom:16px; }
+  .svc-card h3{ font-size:16.5px; margin-bottom:10px; }
+  .svc-card p{ color:var(--text-muted); font-size:13.5px; flex:1; margin-bottom:16px; }
+  .svc-card .sc-factors{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    color:var(--text-faint);
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    border-top:1px solid var(--border-soft);
+    padding-top:14px;
+  }
+
+  .quote-note{
+    display:flex; align-items:center; gap:14px;
+    background:var(--bg-panel);
+    border:1px solid var(--border);
+    border-radius:4px;
+    padding:20px 22px;
+    margin-top:1px;
+    font-size:13.5px;
+    color:var(--text-muted);
+  }
+  .quote-note b{ color:var(--text); font-weight:500; }
+
+  /* Trawl tiers */
+  .fg-pricing{
+    padding:100px 0;
+    border-bottom:1px solid var(--border-soft);
+    background: radial-gradient(ellipse 60% 100% at 100% 0%, rgba(69,184,166,0.06), transparent 60%);
+  }
+  .fg-pricing .eyebrow{ color:var(--teal); }
+  .fg-pricing .eyebrow::before{ background:var(--teal); }
+
+  .tier-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+    margin-top:56px;
+  }
+  .tier{
+    background:var(--bg-panel);
+    border:1px solid var(--border);
+    border-radius:4px;
+    padding:28px 26px;
+    display:flex; flex-direction:column;
+  }
+  .tier.featured{
+    border-color:var(--teal);
+    background:linear-gradient(180deg, rgba(69,184,166,0.06), var(--bg-panel) 40%);
+    position:relative;
+  }
+  .tier.featured::before{
+    content:"MOST INTEREST";
+    position:absolute; top:-11px; left:26px;
+    background:var(--teal);
+    color:#0A1120;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10px;
+    letter-spacing:.06em;
+    padding:4px 9px;
+    border-radius:2px;
+  }
+  .tier .t-name{ font-family:'Space Grotesk',sans-serif; font-size:19px; font-weight:600; margin-bottom:6px; }
+  .tier .t-for{ font-size:12.5px; color:var(--text-faint); margin-bottom:20px; }
+  .tier .t-price{ font-family:'Space Grotesk',sans-serif; font-size:15px; color:var(--text-muted); margin-bottom:22px; padding-bottom:22px; border-bottom:1px solid var(--border-soft); }
+  .tier .t-price .u{ font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--text-faint); display:block; margin-top:4px; }
+  .tier ul{ list-style:none; flex:1; margin-bottom:22px; }
+  .tier ul li{
+    display:flex; gap:10px;
+    font-size:13.5px;
+    color:var(--text-muted);
+    padding:8px 0;
+  }
+  .tier ul li span.mk{ color:var(--teal); font-family:'IBM Plex Mono', monospace; flex:none; }
+  .tier .btn{ width:100%; justify-content:center; }
+
+  /* FAQ */
+  .faq{ padding:100px 0; }
+  .faq-list{ margin-top:48px; max-width:760px; }
+  .faq-item{
+    border-top:1px solid var(--border-soft);
+    padding:22px 0;
+  }
+  .faq-item:last-child{ border-bottom:1px solid var(--border-soft); }
+  .faq-item h4{ font-size:15.5px; margin-bottom:8px; font-family:'Space Grotesk',sans-serif; font-weight:600; }
+  .faq-item p{ font-size:14px; color:var(--text-muted); }
+
+  .cta-band{ padding:100px 0 120px; text-align:center; }
+  .cta-band h2{ font-size:clamp(26px,3.6vw,38px); margin:16px 0 14px; }
+  .cta-band p{ color:var(--text-muted); font-size:15px; margin-bottom:30px; max-width:520px; margin-left:auto; margin-right:auto; }
+
+  @media (max-width: 860px){
+    .svc-grid{ grid-template-columns:1fr 1fr; }
+    .tier-grid{ grid-template-columns:1fr; }
+  }
+  @media (max-width: 520px){
+    .svc-grid{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="/" class="logo"><svg class="mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M18,12 L50,82 L82,12 L67,12 L50,52 L33,12 Z" fill="#534AB7"/><circle cx="50" cy="50" r="7" fill="none" stroke="#534AB7" stroke-width="2.5"/><line x1="50" y1="50" x2="68" y2="30" stroke="#534AB7" stroke-width="2.5"/><circle cx="68" cy="30" r="3" fill="#534AB7"/></svg>VETARI</a>
+    <div class="navlinks">
+      <a href="/about">About</a>
+      <a href="/solutions">Solutions</a>
+      <a href="/pricing" style="color:var(--text);">Pricing</a>
+      <a href="/resources">Resources</a>
+    </div>
+    <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <a href="/#waitlist" class="btn btn-primary">Join waitlist</a>
+  </nav>
+</header>
+
+<main>
+  <section class="pr-hero">
+    <div class="wrap">
+      <div class="eyebrow">Pricing</div>
+      <h1>Scoped services, priced to the work. <span class="grad">A platform, priced to your team.</span></h1>
+      <p class="lede">Our security services are quoted per engagement, since scope, size, and depth vary a lot from one organization to the next. Trawl, our subscription platform, works differently — pricing scales with your headcount.</p>
+    </div>
+  </section>
+
+  <section class="svc-pricing">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Professional services — scoped &amp; quoted.</h2>
+        <p>We put together a fixed quote after a short scoping call, so you know the cost before work starts.</p>
+      </div>
+
+      <div class="svc-grid">
+        <div class="svc-card">
+          <div class="sc-id">PAAS — PHISHING AS A SERVICE</div>
+          <h3>Custom scope</h3>
+          <p>Priced by headcount and campaign frequency — ongoing simulation through the Trawl platform.</p>
+          <div class="sc-factors">Factors: headcount · campaign frequency · channels</div>
+        </div>
+        <div class="svc-card">
+          <div class="sc-id">SATAAS — AWARENESS TRAINING</div>
+          <h3>Custom scope</h3>
+          <p>Priced by audience size and training cadence — live sessions, self-paced modules, or both.</p>
+          <div class="sc-factors">Factors: headcount · cadence · delivery format</div>
+        </div>
+        <div class="svc-card">
+          <div class="sc-id">HRAAS — HUMAN RISK ASSESSMENT</div>
+          <h3>Custom scope</h3>
+          <p>Priced by organization size and how many risk vectors (email, phone, physical) you want assessed.</p>
+          <div class="sc-factors">Factors: headcount · vectors tested</div>
+        </div>
+        <div class="svc-card">
+          <div class="sc-id">OSINT &amp; INVESTIGATIONS</div>
+          <h3>Custom scope</h3>
+          <p>Priced by subject scope and depth — a single-target sweep vs. a full organizational footprint assessment.</p>
+          <div class="sc-factors">Factors: scope size · depth · turnaround</div>
+        </div>
+        <div class="svc-card">
+          <div class="sc-id">DUE DILIGENCE</div>
+          <h3>Custom scope</h3>
+          <p>Priced per subject — a vendor check, an acquisition target, or a candidate background review.</p>
+          <div class="sc-factors">Factors: subject count · check depth · timeline</div>
+        </div>
+        <div class="svc-card">
+          <div class="sc-id">VAPT</div>
+          <h3>Custom scope</h3>
+          <p>Priced by attack surface — number of applications, endpoints, or environments in scope.</p>
+          <div class="sc-factors">Factors: surface size · test depth · retest needs</div>
+        </div>
+      </div>
+      <div class="quote-note">
+        <span>→</span>
+        <span><b>Not sure what you need?</b> Browse <a href="/solutions" style="color:var(--amber);">Solutions</a> to see what each pillar covers, then join the waitlist — we'll follow up with a scoping call and a fixed quote before anything is booked.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="fg-pricing" id="trawl-pricing">
+    <div class="wrap">
+      <div class="eyebrow">Trawl</div>
+      <div class="section-head">
+        <h2>Subscription pricing, scaled to your team.</h2>
+        <p>Phishing simulation and awareness training, billed per user. Exact rates are being finalized ahead of launch.</p>
+      </div>
+
+      <div class="tier-grid">
+        <div class="tier">
+          <div class="t-name">Starter</div>
+          <div class="t-for">Small teams getting a baseline in place</div>
+          <div class="t-price">Contact us<span class="u">PRICED PER USER / MONTH</span></div>
+          <ul>
+            <li><span class="mk">→</span> Core phishing simulation campaigns</li>
+            <li><span class="mk">→</span> Org-wide risk scoring</li>
+            <li><span class="mk">→</span> Standard training content library</li>
+            <li><span class="mk">→</span> Quarterly reporting</li>
+          </ul>
+          <a href="/#waitlist" class="btn btn-ghost">Get early access</a>
+        </div>
+
+        <div class="tier featured">
+          <div class="t-name">Business</div>
+          <div class="t-for">Growing organizations running ongoing programs</div>
+          <div class="t-price">Contact us<span class="u">PRICED PER USER / MONTH</span></div>
+          <ul>
+            <li><span class="mk">→</span> Everything in Starter</li>
+            <li><span class="mk">→</span> Multi-channel simulations (email + more)</li>
+            <li><span class="mk">→</span> Per-employee risk scoring &amp; trends</li>
+            <li><span class="mk">→</span> Automated, targeted training triggers</li>
+            <li><span class="mk">→</span> Monthly reporting for leadership</li>
+          </ul>
+          <a href="/#waitlist" class="btn btn-primary">Get early access</a>
+        </div>
+
+        <div class="tier">
+          <div class="t-name">Enterprise</div>
+          <div class="t-for">Larger organizations with custom requirements</div>
+          <div class="t-price">Contact us<span class="u">CUSTOM PRICING</span></div>
+          <ul>
+            <li><span class="mk">→</span> Everything in Business</li>
+            <li><span class="mk">→</span> Custom campaign design &amp; branding</li>
+            <li><span class="mk">→</span> SSO &amp; advanced access controls</li>
+            <li><span class="mk">→</span> Dedicated onboarding &amp; support</li>
+            <li><span class="mk">→</span> Combined with managed awareness services</li>
+          </ul>
+          <a href="/#waitlist" class="btn btn-ghost">Talk to us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Pricing questions.</h2>
+        <p>The basics, answered up front.</p>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <h4>Why aren't service prices listed?</h4>
+          <p>PAAS, SATAAS, HRAAS, OSINT, due diligence, and VAPT engagements vary a lot in scope — a two-day OSINT sweep and a full organizational assessment aren't the same job. We scope first, then send a fixed quote, so you're never billed for guesswork.</p>
+        </div>
+        <div class="faq-item">
+          <h4>How does Trawl billing work?</h4>
+          <p>Trawl is billed as a subscription, priced per user per month, with annual options planned. Final rates will be published as we move out of early access.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Can I combine a service engagement with Trawl?</h4>
+          <p>Yes — a common setup is an HRAAS baseline or Human Risk engagement up front, followed by Trawl (PAAS) for ongoing simulation and SATAAS for training.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Is there a contract minimum?</h4>
+          <p>Professional services are scoped per engagement with no ongoing commitment required. Trawl and Managed Awareness Programs are subscriptions, with terms confirmed before you sign up.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="wrap">
+      <div class="eyebrow" style="justify-content:center;">Ready to talk numbers?</div>
+      <h2>Join the waitlist to get a quote when we open access.</h2>
+      <p>Tell us what you're looking for and we'll follow up with pricing that fits your organization.</p>
+      <a href="/#waitlist" class="btn btn-primary">Join the waitlist</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-left"><svg class="mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M18,12 L50,82 L82,12 L67,12 L50,52 L33,12 Z" fill="#534AB7"/><circle cx="50" cy="50" r="7" fill="none" stroke="#534AB7" stroke-width="2.5"/><line x1="50" y1="50" x2="68" y2="30" stroke="#534AB7" stroke-width="2.5"/><circle cx="68" cy="30" r="3" fill="#534AB7"/></svg><span class="mono" style="font-size:12px;color:var(--text-faint);">VETARI © 2026</span></div>
+    <p>Human Risk · Investigation · Security · Trawl</p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="bg-network.js"></script>
+
+</body>
+</html>
