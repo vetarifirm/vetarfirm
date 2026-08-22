@@ -26,6 +26,51 @@
   .sd-grid p.desc{ color:var(--text-muted); font-size:15px; margin-bottom:22px; max-width:460px; }
 
   @media (max-width: 860px){ .sd-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- Media: dashboard mockup + video placeholder ---------- */
+  .trawl-media{ padding:100px 0; border-bottom:1px solid var(--border-soft); background: radial-gradient(ellipse 55% 90% at 0% 0%, rgba(214,169,59,0.06), transparent 60%); }
+  .media-grid{ display:grid; grid-template-columns:1fr 1fr; gap:40px; margin-top:56px; align-items:start; }
+  .video-box{ position:relative; aspect-ratio:16/9; background:var(--bg-panel); border:1px solid var(--border); border-radius:8px; display:flex; align-items:center; justify-content:center; }
+  .video-box .play-btn{ width:60px; height:60px; border-radius:50%; background:rgba(255,255,255,0.06); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; }
+  .video-box .play-btn::after{ content:""; width:0; height:0; border-left:15px solid var(--text); border-top:9px solid transparent; border-bottom:9px solid transparent; margin-left:4px; }
+  .video-caption{ margin-top:12px; font-size:12px; color:var(--text-faint); font-family:'IBM Plex Mono', monospace; }
+  .media-h3{ font-size:15.5px; margin-bottom:6px; font-family:'Space Grotesk',sans-serif; font-weight:600; }
+  .media-sub{ font-size:13px; color:var(--text-muted); margin-bottom:16px; }
+
+  .dash-mock{ background:var(--bg-panel); border:1px solid var(--border); border-radius:8px; padding:22px; }
+  .dash-mock .dm-head{ display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; }
+  .dm-tiles{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:18px; }
+  .dm-tile{ background:var(--bg-panel-2); border:1px solid var(--border-soft); border-radius:6px; padding:12px; }
+  .dm-tile .num{ font-family:'Space Grotesk',sans-serif; font-size:19px; font-weight:600; }
+  .dm-tile .lbl{ font-size:10px; color:var(--text-faint); font-family:'IBM Plex Mono', monospace; margin-top:4px; }
+  .dm-chart{ display:flex; align-items:flex-end; gap:6px; height:70px; margin-bottom:18px; }
+  .dm-chart .bar{ flex:1; background:linear-gradient(180deg, var(--teal), transparent); border-radius:2px 2px 0 0; }
+  .dm-depts{ display:flex; flex-direction:column; gap:9px; }
+  .dm-dept{ display:flex; align-items:center; gap:10px; font-size:11.5px; }
+  .dm-dept .dname{ width:78px; color:var(--text-muted); flex:none; }
+  .dm-dept .track{ flex:1; height:6px; background:var(--bg-panel-2); border-radius:3px; overflow:hidden; }
+  .dm-dept .fill{ height:100%; background:var(--amber); border-radius:3px; }
+  .dash-note{ margin-top:16px; font-size:10.5px; color:var(--text-faint); font-family:'IBM Plex Mono', monospace; border-top:1px dashed var(--border-soft); padding-top:12px; }
+
+  /* ---------- Compliance ---------- */
+  .compliance{ padding:100px 0; border-bottom:1px solid var(--border-soft); }
+  .compliance-region{ margin-bottom:36px; }
+  .compliance-region:last-child{ margin-bottom:0; }
+  .compliance-region h4{ font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--teal); margin-bottom:14px; letter-spacing:.06em; text-transform:uppercase; }
+  .compliance-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border-soft); border:1px solid var(--border-soft); }
+  .compliance-card{ background:var(--bg); padding:18px 16px; }
+  .compliance-card .cc-country{ font-weight:600; font-size:14px; margin-bottom:5px; }
+  .compliance-card .cc-law{ font-family:'IBM Plex Mono', monospace; font-size:10.5px; color:var(--amber); margin-bottom:8px; display:block; }
+  .compliance-card p{ font-size:12px; color:var(--text-muted); }
+  .compliance-note{ margin-top:32px; font-size:12.5px; color:var(--text-faint); max-width:640px; }
+
+  @media (max-width: 860px){
+    .media-grid{ grid-template-columns:1fr; }
+    .compliance-grid{ grid-template-columns:1fr 1fr; }
+  }
+  @media (max-width: 520px){
+    .compliance-grid{ grid-template-columns:1fr; }
+  }
 </style>
 </head>
 <body>
@@ -109,6 +154,230 @@
         <li><span class="mk">→</span> Prioritized, actionable recommendations — not just a score</li>
         <li><span class="mk">→</span> A benchmark to measure PAAS/SATAAS improvement against</li>
       </ul>
+    </div>
+  </section>
+
+  <section class="trawl-media" id="preview">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>See what your team sees.</h2>
+        <p>A look at the Trawl console and a walkthrough of how a campaign runs end to end.</p>
+      </div>
+      <div class="media-grid">
+        <div>
+          <div class="media-h3">Product walkthrough</div>
+          <div class="media-sub">A 2-minute tour of launching a campaign, reading the risk score, and seeing training trigger automatically.</div>
+          <div class="video-box">
+            <div class="play-btn"></div>
+          </div>
+          <div class="video-caption">▶ PLACEHOLDER — swap this box for your embedded product demo video</div>
+        </div>
+        <div>
+          <div class="media-h3">Dashboard preview</div>
+          <div class="media-sub">Org-wide risk score, click/report trends, and department breakdown — one screen, updated in real time.</div>
+          <div class="dash-mock">
+            <div class="dm-head">
+              <span class="mono" style="font-size:11px;color:var(--text-faint);">ORG RISK OVERVIEW</span>
+              <span class="badge" style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--teal);border:1px solid rgba(69,184,166,0.4);padding:4px 8px;border-radius:2px;">LIVE</span>
+            </div>
+            <div class="dm-tiles">
+              <div class="dm-tile"><div class="num" style="color:var(--amber);">32</div><div class="lbl">RISK SCORE / 100</div></div>
+              <div class="dm-tile"><div class="num" style="color:var(--teal);">6%</div><div class="lbl">CLICK RATE</div></div>
+              <div class="dm-tile"><div class="num">88%</div><div class="lbl">REPORT RATE</div></div>
+            </div>
+            <div class="dm-chart">
+              <div class="bar" style="height:55%;"></div>
+              <div class="bar" style="height:70%;"></div>
+              <div class="bar" style="height:48%;"></div>
+              <div class="bar" style="height:38%;"></div>
+              <div class="bar" style="height:30%;"></div>
+              <div class="bar" style="height:22%;"></div>
+            </div>
+            <div class="dm-depts">
+              <div class="dm-dept"><span class="dname">Finance</span><span class="track"><span class="fill" style="width:41%;"></span></span></div>
+              <div class="dm-dept"><span class="dname">Sales</span><span class="track"><span class="fill" style="width:35%;"></span></span></div>
+              <div class="dm-dept"><span class="dname">Ops</span><span class="track"><span class="fill" style="width:24%;"></span></span></div>
+              <div class="dm-dept"><span class="dname">Engineering</span><span class="track"><span class="fill" style="width:12%;"></span></span></div>
+            </div>
+            <div class="dash-note">MOCKUP — replace with a real dashboard screenshot or GIF once available</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="services" id="ai-automation">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Built with AI. Runs on automation.</h2>
+        <p>Trawl does the manual work a security team shouldn't have to do by hand.</p>
+      </div>
+      <div class="service-grid" style="grid-template-columns:repeat(2,1fr);">
+        <div class="service-card">
+          <div class="sc-id">AI-GENERATED LURES</div>
+          <h3>Campaigns that stay realistic, automatically</h3>
+          <p>Trawl's AI drafts phishing scenarios tailored to a department, role, and seniority level, and keeps refreshing them — so training never goes stale or becomes predictable.</p>
+        </div>
+        <div class="service-card">
+          <div class="sc-id">AUTOMATED RISK SCORING</div>
+          <h3>Every click and report rolls into a live score</h3>
+          <p>Per-employee and org-wide risk scores update automatically from real behavior. Cross a risk threshold, and targeted micro-training is triggered — no manual list-building required.</p>
+        </div>
+        <div class="service-card">
+          <div class="sc-id">PLAIN-LANGUAGE REPORTING</div>
+          <h3>Ask Trawl, don't build a spreadsheet</h3>
+          <p>Ask a plain-language question — "which department clicked most this quarter?" — and get an instant summary, instead of exporting data and building the chart yourself.</p>
+        </div>
+        <div class="service-card">
+          <div class="sc-id">ANOMALY DETECTION</div>
+          <h3>Flags what's happening outside simulations, too</h3>
+          <p>Unusual click patterns can signal a real phishing campaign hitting your organization, not just a simulated one — Trawl surfaces that distinction instead of burying it in a report.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="approach" id="how-it-works">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>One loop, always running.</h2>
+        <p>Trawl doesn't stop after a single campaign — it keeps cycling so risk doesn't quietly creep back.</p>
+      </div>
+      <div class="path-line">
+        <div class="phases">
+          <div class="phase">
+            <div class="dot"></div>
+            <div class="ph-id">STEP 01</div>
+            <h4>Baseline</h4>
+            <p>HRAAS establishes where your organization actually stands today.</p>
+          </div>
+          <div class="phase">
+            <div class="dot"></div>
+            <div class="ph-id">STEP 02</div>
+            <h4>Simulate</h4>
+            <p>PAAS runs realistic, AI-generated campaigns across your teams.</p>
+          </div>
+          <div class="phase">
+            <div class="dot"></div>
+            <div class="ph-id">STEP 03</div>
+            <h4>Score</h4>
+            <p>Behavior rolls up into a live, per-employee and org-wide risk score.</p>
+          </div>
+          <div class="phase">
+            <div class="dot"></div>
+            <div class="ph-id">STEP 04</div>
+            <h4>Train</h4>
+            <p>SATAAS auto-triggers short, targeted training for anyone at risk.</p>
+          </div>
+          <div class="phase">
+            <div class="dot"></div>
+            <div class="ph-id">STEP 05</div>
+            <h4>Monitor</h4>
+            <p>The loop repeats — trends tracked continuously, not once a year.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="compliance" id="compliance">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Built with African data protection law in view.</h2>
+        <p>Not GDPR as a default with a footnote for everywhere else. This isn't legal advice — we work with your legal or compliance team to map what applies to your organization specifically.</p>
+      </div>
+
+      <div class="compliance-region">
+        <h4>West Africa</h4>
+        <div class="compliance-grid">
+          <div class="compliance-card"><div class="cc-country">Nigeria</div><span class="cc-law">NDPA 2023</span><p>Awareness content and consent language mapped to the Nigeria Data Protection Act.</p></div>
+          <div class="compliance-card"><div class="cc-country">Ghana</div><span class="cc-law">Act 843 (2012)</span><p>Aligned with Ghana's Data Protection Act and Data Protection Commission guidance.</p></div>
+          <div class="compliance-card"><div class="cc-country">Senegal</div><span class="cc-law">Loi 2008-12</span><p>Personal data handling mapped to Senegal's data protection law.</p></div>
+          <div class="compliance-card"><div class="cc-country">Côte d'Ivoire</div><span class="cc-law">Loi 2013-450</span><p>Consent and data-handling practices aligned with national requirements.</p></div>
+        </div>
+      </div>
+
+      <div class="compliance-region">
+        <h4>East Africa</h4>
+        <div class="compliance-grid">
+          <div class="compliance-card"><div class="cc-country">Kenya</div><span class="cc-law">DPA 2019</span><p>Simulation and training data handled per the Kenya Data Protection Act.</p></div>
+          <div class="compliance-card"><div class="cc-country">Rwanda</div><span class="cc-law">Law No. 058/2021</span><p>Aligned with Rwanda's data protection and privacy law.</p></div>
+          <div class="compliance-card"><div class="cc-country">Tanzania</div><span class="cc-law">PDPA 2022</span><p>Mapped to Tanzania's Personal Data Protection Act.</p></div>
+          <div class="compliance-card"><div class="cc-country">Uganda</div><span class="cc-law">DPPA 2019</span><p>Aligned with Uganda's Data Protection and Privacy Act.</p></div>
+        </div>
+      </div>
+
+      <div class="compliance-region">
+        <h4>Southern &amp; North Africa</h4>
+        <div class="compliance-grid">
+          <div class="compliance-card"><div class="cc-country">South Africa</div><span class="cc-law">POPIA</span><p>Built with the Protection of Personal Information Act in view from day one.</p></div>
+          <div class="compliance-card"><div class="cc-country">Zambia</div><span class="cc-law">DPA 2021</span><p>Aligned with Zambia's Data Protection Act.</p></div>
+          <div class="compliance-card"><div class="cc-country">Egypt</div><span class="cc-law">PDPL 2020</span><p>Mapped to Egypt's Personal Data Protection Law.</p></div>
+          <div class="compliance-card"><div class="cc-country">Morocco</div><span class="cc-law">Law 09-08</span><p>Aligned with Morocco's data protection framework.</p></div>
+        </div>
+      </div>
+
+      <p class="compliance-note">Not currently operating in your market? We're expanding coverage as we onboard partners in new countries — tell us where you're based and we'll confirm what's mapped for your jurisdiction.</p>
+    </div>
+  </section>
+
+  <section class="services" id="cost-deploy">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Costs less. Deploys faster.</h2>
+        <p>No enterprise procurement cycle, no implementation project — just a working program.</p>
+      </div>
+      <div class="fg-grid">
+        <div>
+          <div class="media-h3" style="color:var(--amber);">Lower total cost</div>
+          <ul class="fg-list">
+            <li><span class="mk">→</span> No minimum enterprise contract — scales down to teams under 50 as easily as it scales up</li>
+            <li><span class="mk">→</span> Billed in your local currency, not a USD invoice with FX risk built in</li>
+            <li><span class="mk">→</span> One subscription replaces separate phishing, training, and assessment vendors</li>
+            <li><span class="mk">→</span> No extra infrastructure, licensing, or dedicated IT overhead to run it</li>
+          </ul>
+        </div>
+        <div>
+          <div class="media-h3" style="color:var(--teal);">Deploy in days, not quarters</div>
+          <ul class="fg-list">
+            <li><span class="mk">→</span> Cloud-based console — nothing to install on endpoints or servers</li>
+            <li><span class="mk">→</span> Connects to Google Workspace, Microsoft 365, and standard SMTP in minutes</li>
+            <li><span class="mk">→</span> Upload a CSV or sync your directory, and your first campaign can go live within 24 hours</li>
+            <li><span class="mk">→</span> Guided onboarding, not a six-week implementation project</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="values" id="safeguard">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Tests your people. Doesn't expose them.</h2>
+        <p>The point is to reduce risk, not create new ways for staff to be compromised or blamed.</p>
+      </div>
+      <div class="value-grid">
+        <div class="value-card">
+          <div class="vc-id">01</div>
+          <h3>Safe-by-design simulations</h3>
+          <p>Simulated phishing never touches real credentials or production systems — every campaign runs inside a controlled environment your team approves before it launches.</p>
+        </div>
+        <div class="value-card">
+          <div class="vc-id">02</div>
+          <h3>Coaching, not shaming</h3>
+          <p>Someone who clicks gets short, immediate, judgment-free guidance in the moment — not a name on a leaderboard forwarded to their manager.</p>
+        </div>
+        <div class="value-card">
+          <div class="vc-id">03</div>
+          <h3>Anonymized, aggregate reporting</h3>
+          <p>Leadership sees department and org-level trends. Individual results stay confidential by default, unless your organization's own policy says otherwise.</p>
+        </div>
+        <div class="value-card">
+          <div class="vc-id">04</div>
+          <h3>Early warning for real attacks</h3>
+          <p>Your people become a sensor network — one-click reporting flags live phishing campaigns hitting your organization, so security hears about it in minutes, not weeks.</p>
+        </div>
+      </div>
     </div>
   </section>
 

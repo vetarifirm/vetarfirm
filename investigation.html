@@ -26,6 +26,32 @@
   .sd-grid p.desc{ color:var(--text-muted); font-size:15px; margin-bottom:22px; max-width:460px; }
 
   @media (max-width: 860px){ .sd-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- Sample report ---------- */
+  .sample{ padding:100px 0; border-bottom:1px solid var(--border-soft); background: radial-gradient(ellipse 55% 90% at 100% 0%, rgba(69,184,166,0.06), transparent 60%); }
+  .sample-grid{ display:grid; grid-template-columns:0.85fr 1.15fr; gap:56px; align-items:start; }
+  .sample-panel{ background:var(--bg-panel); border:1px solid var(--border); border-radius:8px; padding:0; overflow:hidden; }
+  .sr-head{ display:flex; justify-content:space-between; align-items:center; padding:16px 20px; border-bottom:1px solid var(--border-soft); }
+  .sr-head .tag{ font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--text-faint); }
+  .sr-head .dots span{ display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--border); margin-left:5px; }
+  .sr-body{ padding:20px 22px; }
+  .sr-row{ display:flex; justify-content:space-between; gap:14px; padding:11px 0; border-top:1px solid var(--border-soft); font-size:12.5px; }
+  .sr-row:first-child{ border-top:none; }
+  .sr-row .k{ color:var(--text-faint); font-family:'IBM Plex Mono', monospace; flex:none; }
+  .sr-row .v{ color:var(--text); text-align:right; }
+  .sr-row .v.redact{ color:var(--redact); background:var(--text-muted); border-radius:2px; padding:1px 8px; }
+  .sr-row .v.flag{ color:var(--amber); }
+  .sr-row .v.ok{ color:var(--teal); }
+  .sr-flags{ margin-top:16px; padding-top:16px; border-top:1px solid var(--border-soft); }
+  .sr-flags .sf-label{ font-family:'IBM Plex Mono', monospace; font-size:10.5px; color:var(--text-faint); text-transform:uppercase; letter-spacing:.06em; margin-bottom:10px; }
+  .sr-flags ul{ list-style:none; }
+  .sr-flags li{ font-size:12.5px; color:var(--text-muted); padding:6px 0; display:flex; gap:8px; }
+  .sr-flags li::before{ content:"⚑"; color:var(--amber); flex:none; }
+  .sr-conf{ display:flex; align-items:center; justify-content:space-between; padding:14px 22px; background:var(--bg-panel-2); border-top:1px solid var(--border-soft); font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--text-faint); }
+  .sr-conf b{ color:var(--teal); }
+
+  /* ---------- Sources map ---------- */
+  .sources{ padding:100px 0; border-bottom:1px solid var(--border-soft); }
 </style>
 </head>
 <body>
@@ -108,6 +134,142 @@
         <li><span class="mk">→</span> Threat actor and dark-web chatter monitoring where relevant</li>
         <li><span class="mk">→</span> Delivered as a periodic report or ongoing engagement</li>
       </ul>
+    </div>
+  </section>
+
+  <section class="services" id="who-we-help">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Whoever's making the decision, we back it with evidence.</h2>
+        <p>The subject changes. The standard doesn't.</p>
+      </div>
+      <div class="service-grid" style="grid-template-columns:repeat(3,1fr);">
+        <div class="service-card">
+          <div class="sc-id">HR &amp; PEOPLE TEAMS</div>
+          <h3>Know who you're hiring before day one</h3>
+          <p>Verify employment history, qualifications, and public conduct for senior or sensitive hires — before they're issued a badge and system access.</p>
+        </div>
+        <div class="service-card">
+          <div class="sc-id">LEGAL &amp; COMPLIANCE</div>
+          <h3>A documented trail behind every decision</h3>
+          <p>Findings delivered in a form built to hold up — sourced, dated, and defensible if a decision is ever questioned later.</p>
+        </div>
+        <div class="service-card">
+          <div class="sc-id">LAW ENFORCEMENT &amp; INVESTIGATORS</div>
+          <h3>Lawful, sourced intelligence to support a case</h3>
+          <p>OSINT gathered strictly through lawful, publicly accessible means — supporting, not replacing, formal investigative process.</p>
+        </div>
+        <div class="service-card">
+          <div class="sc-id">BUSINESSES &amp; COMPANIES</div>
+          <h3>Vet a vendor, partner, or acquisition target</h3>
+          <p>Confirm a company is who it says it is — ownership, litigation history, and red flags a pitch deck won't mention.</p>
+        </div>
+        <div class="service-card">
+          <div class="sc-id">FOUNDERS &amp; EXECUTIVES</div>
+          <h3>Protect your brand and your name</h3>
+          <p>Monitor impersonation, leaked data, and what's publicly attached to your name or company before it becomes a crisis.</p>
+        </div>
+        <div class="service-card">
+          <div class="sc-id">PERSON OF INTEREST</div>
+          <h3>Verify a person, individually</h3>
+          <p>Background checks on an individual — a prospective business partner, landlord-tenant situation, or personal safety concern — handled with discretion.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sources" id="sources">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Research across the sources that actually matter.</h2>
+        <p>Not a single database query — a sweep across public and specialist sources worldwide, then cross-checked.</p>
+      </div>
+      <div class="service-grid" style="grid-template-columns:repeat(4,1fr);">
+        <div class="service-card">
+          <div class="sc-id">RECORDS</div>
+          <h3>Corporate &amp; public records</h3>
+          <p>Company registries, ownership filings, property, and court &amp; litigation records, in-country and internationally.</p>
+        </div>
+        <div class="service-card">
+          <div class="sc-id">WATCHLISTS</div>
+          <h3>Sanctions &amp; watchlists</h3>
+          <p>Global sanctions, PEP, and adverse-media watchlists checked as part of every due diligence engagement.</p>
+        </div>
+        <div class="service-card">
+          <div class="sc-id">DIGITAL FOOTPRINT</div>
+          <h3>Social &amp; open-web presence</h3>
+          <p>Social media, professional networks, forums, and what's indexed publicly about a subject.</p>
+        </div>
+        <div class="service-card">
+          <div class="sc-id">EXPOSURE DATA</div>
+          <h3>Breach &amp; leak databases</h3>
+          <p>Leaked credential sets and breach data checked for exposure tied to a subject or organization.</p>
+        </div>
+        <div class="service-card">
+          <div class="sc-id">MEDIA</div>
+          <h3>News &amp; media archives</h3>
+          <p>Local and international press archives — coverage a quick search alone tends to miss.</p>
+        </div>
+        <div class="service-card">
+          <div class="sc-id">DEEP &amp; DARK WEB</div>
+          <h3>Closed-forum &amp; dark-web monitoring</h3>
+          <p>Threat-actor chatter and closed forums monitored where relevant to brand or credential exposure.</p>
+        </div>
+        <div class="service-card">
+          <div class="sc-id">INFRASTRUCTURE</div>
+          <h3>Technical &amp; asset discovery</h3>
+          <p>Domains, subdomains, and exposed infrastructure tied to an organization's public footprint.</p>
+        </div>
+        <div class="service-card">
+          <div class="sc-id">HUMAN VERIFICATION</div>
+          <h3>Analyst cross-checking</h3>
+          <p>Every automated finding reviewed by a human analyst before it reaches your report — not a raw data dump.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sample" id="sample-report">
+    <div class="wrap sample-grid">
+      <div>
+        <div class="eyebrow" style="color:var(--teal);">Accuracy &amp; methodology</div>
+        <h2>Verified, not just scraped.</h2>
+        <p class="desc">A search engine gives you a list of links. An investigation gives you a conclusion you can act on. Every finding is cross-referenced against at least one independent source before it's included, and rated by how confident we are in it — so you know the difference between a confirmed fact and a lead worth watching.</p>
+        <ul class="fg-list">
+          <li><span class="mk">→</span> Findings cross-checked against multiple independent sources</li>
+          <li><span class="mk">→</span> Reviewed by a human analyst — not delivered as a raw data export</li>
+          <li><span class="mk">→</span> Confidence-rated, so speculation is never presented as fact</li>
+          <li><span class="mk">→</span> Full source trail retained for every report, in case it's ever questioned</li>
+        </ul>
+        <a href="/#waitlist" class="btn btn-ghost">Request a sample scope</a>
+      </div>
+
+      <div class="sample-panel">
+        <div class="sr-head">
+          <span class="tag">SAMPLE OUTPUT // DD-2607-014</span>
+          <div class="dots"><span></span><span></span><span></span></div>
+        </div>
+        <div class="sr-body">
+          <div class="sr-row"><span class="k">SUBJECT</span><span class="v redact">[REDACTED — SAMPLE]</span></div>
+          <div class="sr-row"><span class="k">SCOPE</span><span class="v">Vendor due diligence — pre-contract</span></div>
+          <div class="sr-row"><span class="k">CORPORATE RECORD</span><span class="v ok">MATCHES FILING</span></div>
+          <div class="sr-row"><span class="k">SANCTIONS / PEP</span><span class="v ok">NO MATCH</span></div>
+          <div class="sr-row"><span class="k">LITIGATION HISTORY</span><span class="v flag">1 ACTIVE CASE FOUND</span></div>
+          <div class="sr-row"><span class="k">CREDENTIAL EXPOSURE</span><span class="v flag">2 ACCOUNTS IN BREACH DATA</span></div>
+          <div class="sr-row"><span class="k">MEDIA COVERAGE</span><span class="v">3 relevant articles, 2019–2025</span></div>
+          <div class="sr-flags">
+            <div class="sf-label">Flagged for review</div>
+            <ul>
+              <li>Active civil litigation not disclosed by subject during onboarding</li>
+              <li>Two employee email addresses found in third-party breach datasets</li>
+            </ul>
+          </div>
+        </div>
+        <div class="sr-conf">
+          <span>OVERALL CONFIDENCE</span>
+          <span><b>HIGH</b> — 4 independent sources cross-verified</span>
+        </div>
+      </div>
     </div>
   </section>
 
