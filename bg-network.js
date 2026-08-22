@@ -105,3 +105,21 @@
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
 })();
+
+/* ---------- Mobile nav toggle ---------- */
+function toggleNav(){
+  var nav = document.querySelector('.navlinks');
+  var btn = document.querySelector('.nav-toggle');
+  if(!nav || !btn) return;
+  nav.classList.toggle('open');
+  btn.classList.toggle('active');
+}
+document.addEventListener('click', function(e){
+  var nav = document.querySelector('.navlinks');
+  var btn = document.querySelector('.nav-toggle');
+  if(!nav || !btn || !nav.classList.contains('open')) return;
+  if(!nav.contains(e.target) && !btn.contains(e.target)){
+    nav.classList.remove('open');
+    btn.classList.remove('active');
+  }
+});

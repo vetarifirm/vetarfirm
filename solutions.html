@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Solutions — Vetari</title>
-<meta name="description" content="Vetari solutions by team: security &amp; IT, developers, HR &amp; people, and legal &amp; deal teams.">
+<meta name="description" content="Vetari solutions by team: security &amp; IT, HR &amp; people, legal &amp; deal teams — human risk and investigation, built for African organizations.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -151,6 +151,7 @@
       <a href="/pricing">Pricing</a>
       <a href="/resources">Resources</a>
     </div>
+    <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle menu"><span></span><span></span><span></span></button>
     <a href="/#waitlist" class="btn btn-primary">Join waitlist</a>
   </nav>
 </header>
@@ -159,19 +160,19 @@
   <section class="sol-hero">
     <div class="wrap">
       <div class="eyebrow">Solutions</div>
-      <h1>Three services. <span class="grad">One built for each pillar.</span></h1>
-      <p class="lede">Vetari's services apply differently depending on what you're trying to protect — your people, your decisions, or your infrastructure. Explore each pillar in depth, or find your team below.</p>
+      <h1>Two pillars. <span class="grad">Built around what you're actually trying to protect.</span></h1>
+      <p class="lede">Vetari's services apply differently depending on what you're trying to protect — your people, or the decisions your organization makes about them. Explore each pillar in depth, or find your team below.</p>
     </div>
   </section>
 
   <section class="pillars" style="padding-top:0; padding-bottom:100px;">
     <div class="wrap">
-      <div class="pillar-grid">
+      <div class="pillar-grid" style="grid-template-columns:3fr 2fr;">
         <a href="/human-risk" class="pillar" data-accent="amber" style="text-decoration:none; display:flex;">
           <div style="display:flex; flex-direction:column; width:100%;">
-            <div class="pillar-id">PILLAR 01 — HUMAN RISK</div>
+            <div class="pillar-id">PILLAR 01 — HUMAN RISK <span style="color:var(--text-faint);">· CORE FOCUS</span></div>
             <h3>People are the perimeter.</h3>
-            <p class="pdesc">PAAS, SATAAS, and HRAAS — phishing simulation, awareness training, and risk assessment, delivered as subscribable services.</p>
+            <p class="pdesc">PAAS, SATAAS, and HRAAS — phishing simulation, awareness training, and risk assessment, delivered as subscribable services through Trawl.</p>
             <ul class="pillar-list">
               <li><span class="plabel">PAAS — Phishing as a Service</span><span class="product-tag">TRAWL</span></li>
               <li><span class="plabel">SATAAS — Awareness Training as a Service</span></li>
@@ -193,19 +194,6 @@
             <div class="mono" style="margin-top:20px; font-size:12.5px; color:var(--teal);">Explore Investigation →</div>
           </div>
         </a>
-        <a href="/security" class="pillar" data-accent="indigo" style="text-decoration:none; display:flex;">
-          <div style="display:flex; flex-direction:column; width:100%;">
-            <div class="pillar-id">PILLAR 03 — SECURITY</div>
-            <h3>Find it before they do.</h3>
-            <p class="pdesc">Hands-on testing of networks, applications, and infrastructure — reports written to be triaged and fixed.</p>
-            <ul class="pillar-list">
-              <li><span class="plabel">Vulnerability Assessment &amp; Pentesting</span></li>
-              <li><span class="plabel">Security assessments</span></li>
-              <li><span class="plabel">Ethical hacking engagements</span></li>
-            </ul>
-            <div class="mono" style="margin-top:20px; font-size:12.5px; color:#8B7FE8;">Explore Security →</div>
-          </div>
-        </a>
       </div>
     </div>
   </section>
@@ -214,10 +202,10 @@
     <div class="wrap">
       <div class="eyebrow">Or, browse by team</div>
       <div class="quicknav" style="margin-top:20px;">
-        <a class="qn-item" href="#security"><span class="txt">Test my app or network</span><span class="arrow">→</span></a>
+        <a class="qn-item" href="#security"><span class="txt">Assess our exposure</span><span class="arrow">→</span></a>
         <a class="qn-item" href="#legal"><span class="txt">Vet a vendor or hire</span><span class="arrow">→</span></a>
         <a class="qn-item" href="#hr"><span class="txt">Train my team on phishing</span><span class="arrow">→</span></a>
-        <a class="qn-item" href="#developers"><span class="txt">Test my code before release</span><span class="arrow">→</span></a>
+        <a class="qn-item" href="#brand"><span class="txt">Protect our brand</span><span class="arrow">→</span></a>
       </div>
     </div>
   </section>
@@ -227,7 +215,7 @@
       <div class="seg-copy">
         <div class="seg-tag">FOR — SECURITY &amp; IT TEAMS</div>
         <h2>Find the gaps before an attacker does.</h2>
-        <p class="problem">You're accountable for infrastructure you can't always see the edges of — shadow IT, exposed assets, and a growing attack surface. You need testing that mirrors how real attackers actually operate, not a checklist scan.</p>
+        <p class="problem">You're accountable for exposure you can't always see the edges of — your public footprint, exposed credentials, and the people attackers actually target first. You need visibility that mirrors how real attackers operate, not a once-a-year checklist.</p>
         <a href="/#waitlist" class="btn btn-ghost">Talk to us about your environment</a>
       </div>
       <div class="seg-services">
@@ -236,12 +224,12 @@
           <span class="ss-tag">INVESTIGATION</span>
         </div>
         <div class="seg-service">
-          <div><div class="ss-name">Vulnerability Assessment &amp; Penetration Testing</div><div class="ss-desc">Hands-on testing of networks and infrastructure</div></div>
-          <span class="ss-tag">SECURITY</span>
-        </div>
-        <div class="seg-service">
           <div><div class="ss-name">HRAAS — Human Risk Assessment</div><div class="ss-desc">Understand where your people are the weakest link</div></div>
           <span class="ss-tag">HRAAS</span>
+        </div>
+        <div class="seg-service">
+          <div><div class="ss-name">PAAS — Phishing as a Service</div><div class="ss-desc">Ongoing simulation through Trawl, not a one-time test</div></div>
+          <span class="ss-tag">TRAWL</span>
         </div>
         <div class="seg-service">
           <div><div class="ss-name">SATAAS — Awareness Training</div><div class="ss-desc">Ongoing program so it's never a once-a-year task</div></div>
@@ -251,27 +239,27 @@
     </div>
   </section>
 
-  <section class="segment" id="developers">
+  <section class="segment" id="brand">
     <div class="wrap segment-grid reverse">
       <div class="seg-services">
         <div class="seg-service">
-          <div><div class="ss-name">Application &amp; API Penetration Testing</div><div class="ss-desc">Testing scoped to your codebase, before or after release</div></div>
-          <span class="ss-tag">SECURITY</span>
+          <div><div class="ss-name">Brand &amp; Threat Intelligence</div><div class="ss-desc">Monitor impersonation, phishing domains, and leaked data</div></div>
+          <span class="ss-tag">INVESTIGATION</span>
         </div>
         <div class="seg-service">
-          <div><div class="ss-name">Infrastructure &amp; Cloud Testing</div><div class="ss-desc">CI/CD pipelines, cloud config, and exposed services</div></div>
-          <span class="ss-tag">SECURITY</span>
+          <div><div class="ss-name">OSINT &amp; Investigations</div><div class="ss-desc">Know what's publicly discoverable before someone exploits it</div></div>
+          <span class="ss-tag">INVESTIGATION</span>
         </div>
         <div class="seg-service">
-          <div><div class="ss-name">Actionable Findings</div><div class="ss-desc">Reports written to be triaged and fixed, not just read</div></div>
+          <div><div class="ss-name">Regional Coverage</div><div class="ss-desc">Monitoring built around African domains, brands, and platforms</div></div>
           <span class="ss-tag">✓</span>
         </div>
       </div>
       <div class="seg-copy">
-        <div class="seg-tag">FOR — DEVELOPERS &amp; ENGINEERING TEAMS</div>
-        <h2>Testing that fits into how you actually ship.</h2>
-        <p class="problem">Generic pentest reports full of low-priority noise don't help anyone. We scope engagements to your stack, prioritize by real exploitability, and hand back findings your team can act on without a translation layer.</p>
-        <a href="/security" class="btn btn-ghost">See the Security pillar</a>
+        <div class="seg-tag">FOR — FOUNDERS &amp; BRAND OWNERS</div>
+        <h2>Your brand is a target too.</h2>
+        <p class="problem">Impersonation domains, fake support accounts, and leaked customer data can do damage long before anyone on your team notices. We monitor for it and hand you evidence, not just an alert.</p>
+        <a href="/investigation" class="btn btn-ghost">See the Investigation pillar</a>
       </div>
     </div>
   </section>
@@ -339,7 +327,7 @@
 <footer>
   <div class="wrap">
     <div class="f-left"><svg class="mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M18,12 L50,82 L82,12 L67,12 L50,52 L33,12 Z" fill="#534AB7"/><circle cx="50" cy="50" r="7" fill="none" stroke="#534AB7" stroke-width="2.5"/><line x1="50" y1="50" x2="68" y2="30" stroke="#534AB7" stroke-width="2.5"/><circle cx="68" cy="30" r="3" fill="#534AB7"/></svg><span class="mono" style="font-size:12px;color:var(--text-faint);">VETARI © 2026</span></div>
-    <p>Human Risk · Investigation · Security · Trawl</p>
+    <p>Human Risk · Investigation · Trawl</p>
   </div>
 </footer>
 
